@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #dddddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+            text-align: center;
+        }
+        
+        .shelf {
+            width: 90%;
+            height: 8px;
+            background-color: #8b4513;
+            border-radius: 10%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            border-bottom: 10px solid #dddddd;
+            border-top: 80px solid #dddddd;
+        }
+        
+        .shelf:hover {
+            animation: shelf-lift 0.5s ease;
+            animation-iteration-count: 1;
+            transform-origin: 50% 50%;
+            cursor: pointer;
+        }
+        
+        .shelf:hover .book {
+            animation: book-bounce 0.5s ease;
+            animation-iteration-count: 1;
+        }
+        
+        .book {
+            position: relative;
+            margin-bottom: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 2px;
+            font-size: 20px;
+            overflow: hidden;
+            line-height: 15%;
+            text-align: center;
+            font-weight: lighter;
+        }
+        .book::before {
+            content: ""; /* 기본 content 값 */
+            position: absolute;
+            top: -5px;
+            left: 0;
+            right: 0;
+            color: #555; /* 텍스트 색상 */
+            text-align: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        @keyframes book-bounce {
+            0% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            80% { transform: translateY(-2px); }
+            100% { transform: translateY(0); }
+        }
+        
+        @keyframes shelf-lift {
+            0% { transform: translateY(0) rotate(0); }
+            20% { transform: translateY(-5px) rotate(2deg); }
+            40% { transform: translateY(-10px) rotate(0); }
+            60% { transform: translateY(-10px) rotate(-2deg);}
+            80% {  transform: translateY(-5px) rotate(-1deg);}
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <a class="shelf">
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+      
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+      
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+      
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+      
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+      
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+      
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+      
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+      
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+      
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+    </a>
+    <script>
+        // 20개의 색상
+        const colours = [
+            "#52aca2", "#bada55", "#999999", "#78d663", "#f1ab4f", "#f04f6b", "#ffda4f",
+            "#55cdfc", "#aa7d42", "#ced5df", "#f7850a", "#935357", "#b190a5", "#90b19c",
+            "#fdbdb8", "#ffe4e1", "#666666", "#93786f", "#f6c9b9", "#ecc2bf", "#aa5e40",
+            "#aa5e40", "#408caa", "#489cbd", "#bada55", "#062542", "#998888", "#cdcdd2",
+            "#cbc2bf", "#e7d5c9", "#e9d7c7", "#a2697d", "#86516b", "#dbdcff", "#feffa3",
+            "#00b8ff", "#ff9966", "#a52a5e", "#008080", "#000000", "#01f6f1", "#ffc0cb"
+        ];
+
+        const contentColors = ["#555", "#fff"];
+      
+        // content 값을 위한 배열
+        const contentOptions = ["", "-", "--", "---", "----", "-----", "------", "-------", "--------"];
+      
+        // 99개의 책을 랜덤 스타일로 생성
+        const books = document.querySelectorAll('.book');
+        books.forEach((book, i) => {
+          // 랜덤 색상 선택
+          const randomColor = colours[Math.floor(Math.random() * colours.length)];
+      
+          // 랜덤 높이와 너비
+          const randomHeight = Math.floor(Math.random() * 30) + 40; // 40px ~ 70px
+          const randomWidth = Math.floor(Math.random() * 4) + 7; // 7px ~ 10px
+      
+          // 애니메이션 지연 시간
+          const animationDelay = i * 0.002;
+      
+          // 랜덤 content 값
+          const randomContent = contentOptions[Math.floor(Math.random() * contentOptions.length)];
+          const randomContentColor = contentColors[Math.floor(Math.random() * contentColors.length)];
+      
+          // 스타일 적용
+          book.style.backgroundColor = randomColor;
+          book.style.height = `${randomHeight}px`;
+          book.style.width = `${randomWidth}px`;
+          book.style.animationDelay = `${animationDelay}s`;
+      
+          // ::before의 content 값 동적으로 설정
+          const style = document.createElement('style');
+          style.innerHTML = `
+            .book:nth-child(${i + 1})::before {
+              content: "${randomContent}";
+              color: ${randomContentColor};
+            }
+          `;
+          document.head.appendChild(style);
+        });
+      </script>
+</body>
+</html>

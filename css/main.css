@@ -1,0 +1,88 @@
+.main_slider {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    margin: auto;
+    overflow: hidden;
+  }
+  
+  .main_slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    transform: translateX(-100%);
+  }
+  
+  .main_slide {
+    min-width: 100%;
+    flex : 0 0 100%;
+    height: 560px;
+    display: flex;
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    background-color: var(--slide-bgcolor, #fff); /* 배경색 기본값 */
+  }
+  
+  .main_slide img {
+    width: auto;
+    height: 100%;
+  }
+  
+  .main_slider .btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .slidePrevBtn {
+    left: 15px;
+  }
+  
+  .slideNextBtn {
+    right: 15px;
+  }
+
+  .chat-bot {
+    position: fixed;
+    right: 50px;
+    bottom: -5%; /* 초기 위치 */
+    animation: bounce 2s infinite ease-in-out; /* 부드러운 애니메이션 */
+  }
+  .left-eye, .right-eye {
+    position: relative; /* 눈동자의 기준점 */
+    width: 40px; /* 눈 크기 */
+    height: 40px; /* 눈 크기 */
+    overflow: hidden; /* 눈동자가 벗어나지 않게 */
+  }
+  
+  
+  .eye-pupil {
+    position: absolute; /* 부모 요소 기준 */
+    background-color: #2d2d2d;
+    border-radius: 50%;
+    width: 8px; /* 눈동자 크기 */
+    height: 8px; /* 눈동자 크기 */
+    top: 50%; /* 부모 요소의 정중앙 */
+    left: 50%; /* 부모 요소의 정중앙 */
+    transform: translate(-50%, -50%); /* 정중앙 보정 */
+  }
+  
+  
+  @keyframes bounce {
+    0% {
+      bottom: -5%;
+    }
+    50% {
+      bottom: -7%; /* 중간에서 최저점 */
+    }
+    100% {
+      bottom: -5%; /* 원래 위치 */
+    }
+  }
+  
+  
