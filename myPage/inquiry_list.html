@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my page</title>
+    <title>inquiry list</title>
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/myPage.css"/>
+    <link rel="stylesheet" href="/css/inquiry_list.css"/>
 </head>
 <body>
     <div class="container">
@@ -463,9 +464,8 @@
         </header>
 
         <main>
-            <div class="myPage_header"></div>
             <div class="myPage_inner inner">
-                <div class="myPage_left">
+                <div class="myPage_left" style="margin-top: 0;">
                     <a href="" class="myPage_profile">
                         <div class="member_profile_photo_area">
                             <div class="member_profile_photo"></div>
@@ -515,7 +515,52 @@
                 </div>
 
                 <div class="myPage_right">
-                    
+                    <div class="list_menu">
+                        <div class="list_menu_item"><a href="">전체</a></div>
+                        <div class="list_menu_item"><a href="">답변 대기</a></div>
+                        <div class="list_menu_item"><a href="">답변 완료</a></div>
+                        <a href=""><span>1:1 문의하기</span></a>
+                    </div>
+
+                    <div class="inquiry_list">
+                        <ul>
+                            <li class="inquriy_item"> <!-- 조건문 (li)반복 -->
+                                <div class="inquriy_item_wrap">
+                                    <div class="inquriy_item_header">
+                                        <span class="inquriy_state completion">답변 완료</span> <!-- 데이터 넣을 때 이거 지우고 밑에 예시처럼 넣어주세요 -->
+                                        <!--
+                                        <span class="inquriy_state" 
+                                            th:classappend="${status == '답변 대기'} ? 'stay' : 'completion'">
+                                            [[${status}]] 예시 구문
+                                        </span>
+                                        ** span의 기본 클래스명 : inquriy_state
+                                           답변 대기 중이면 'stay', 답변 완료면 'completion' 클래스명 추가하기 **
+                                        -->
+                                        <span class="inquiry_type">배송/수령예정일 안내</span>
+                                    </div>
+
+                                    <div class="inquriy_item_title_wrap">
+                                        <span class="inquiry_title">배송 언제 되나요? 빨리 오세욧!!!</span>
+                                        <span>
+                                            <span class="inquiry_date">2024/12/23</span>
+                                            <i class="ic ic_arrow_down"></i>
+                                        </span>
+                                    </div>
+
+                                    <div class="inquriy_item_content_wrap">
+                                        <p class="inquriy">
+                                            <img src="https://i.pinimg.com/736x/55/a5/d0/55a5d027addb0c84cb2df4b6a77311b6.jpg" alt=""> <!-- if : 사진이 있다면 display : block;, 없다면 display : none; -->
+                                            <strong>질문 > </strong> 제가 책을 어제 시켰는데 왜 아직도 안 오나요 핵로켓배송이라고 해서 시켰는데 핵느림보 배송이네요 이젠문고 실망입니다 완전 실망실망대실망 흥흥흥흥
+                                        </p>
+                                        <p class="inquiry_answer"> <!-- if : 답변이 있다면 display : block;, 없다면 display : none; -->
+                                            <strong>답변 > </strong> 홍길동 고객님, 저희 이젠 문고에서 많은 불편함을 느끼게 해서 죄송합니다. 저희 매장은 구제불능인 거 같습니다. 조만간 폐업하도록 하겠습니다. 감사합니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </main>
@@ -568,5 +613,6 @@
     </div>
     
     <script src="/js/header.js"> </script>
+    <script src="/js/inquiry_list.js"> </script>
 </body>
 </html>

@@ -1,0 +1,108 @@
+.location_container { margin-top: 5vh;}
+
+.location_header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    position: relative;
+}
+.select_area_title {
+    width: 10%;
+}
+.select_area_title, .select_area_list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.select_area_title > span {
+    font-size: 25px;
+    line-height: 30px;
+    font-weight: 700;
+}
+
+.select_area_list {
+    position: absolute;
+    top: 10%;
+    right: 0;
+    width: 150px;
+    opacity: 0; /* 기본적으로 숨김 */
+    transition: opacity 4s ease; /* 서서히 나타나는 애니메이션 */
+    visibility: hidden; /* 애니메이션 완료 후 보이지 않도록 설정 */
+}
+.select_area_list.visible {
+    opacity: 1; /* 서서히 보이기 */
+    visibility: visible; /* 보이도록 설정 */
+    background-color: #c6c6c62a;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+.ic_close_btn {
+    z-index: 2;
+    position: absolute;
+    right: 0%;
+    top: 10%;
+    transform: rotate(45deg); /* 기본 상태: + 모양 */
+    transition: none; /* 기본 상태에서 애니메이션 없음 */
+    cursor: pointer;
+    position: relative; /* 위치 이동을 위해 필요 */
+    transform-origin: center; /* 회전 중심 설정 */
+}
+
+.ic_close_btn.move {
+    animation: roll-forward 1.5s ease forwards;
+}
+
+.ic_close_btn.return {
+    animation: roll-back 1.5s ease forwards;
+}
+
+/* 굴러가는 애니메이션 */
+@keyframes roll-forward {
+    0% {
+        transform: rotate(0deg);
+        right: 0%;
+    }
+    100% {
+        right: 13%;
+        transform: rotate(-540deg);
+    }
+}
+
+/* 돌아오는 애니메이션 */
+@keyframes roll-back {
+    0% {
+        transform: rotate(-540deg);
+        right: 13%; /* 현재 위치 */
+    }
+    100% {
+        transform: rotate(45deg); /* 최종 + 모양 */
+        right: 0; /* 원래 위치 */
+    }
+}
+
+.select_area {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-left: 8px;
+}
+.ctgBtn {
+    font-size: 1rem;
+    letter-spacing: 0.9px;
+    position: relative;
+    padding-left: 15px;
+}
+.ctgBtn::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    background-color: #555;
+    position: absolute;
+    border: 1px solid #555;
+    border-radius: 100%;
+    left: 0;
+    top: 25%;
+}
+
