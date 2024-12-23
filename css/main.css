@@ -75,13 +75,13 @@
   
   @keyframes bounce {
     0% {
-      bottom: -5%;
+      bottom: -4%;
     }
     50% {
-      bottom: -7%; /* 중간에서 최저점 */
+      bottom: -6%; /* 중간에서 최저점 */
     }
     100% {
-      bottom: -5%; /* 원래 위치 */
+      bottom: -4%; /* 원래 위치 */
     }
   }
   

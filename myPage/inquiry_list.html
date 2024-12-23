@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>inquiry</title>
+    <title>my page</title>
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
-    <link rel="stylesheet" href="/css/inquiry.css"/>
+    <link rel="stylesheet" href="/css/myPage.css"/>
 </head>
 <body>
     <div class="container">
@@ -463,121 +463,60 @@
         </header>
 
         <main>
-            <div class="inner">
-                <div class="inquiry_container">
-                    <h1>1:1 문의 접수</h1>
-                    <div class="info_box">
-                        <p class="info_box_title" style="margin-bottom: 30px;">
-                            <i class="ic ic_exclamation"></i>
-                            <span>문의내용 답변 안내</span>
-                        </p>
-                        <ul>
-                            <li>답변은 마이페이지 또는 회원정보에 등록된 이메일로 확인 가능합니다.</li>
-                            <li>당일 17시 이후 문의건과 공휴일 1:1 문의는 문의 유형과 이름/연락처/이메일 주소를 남겨 주시면 확인 후 운영시간에 통지해 드립니다.</li>
-                            <li>정상근무일 기준이며, 통지예정일이 휴일인 경우 다음 정상 근무일에 진행 됩니다.</li>
-                            <li>이젠문고 고객센터는 산업안전보건법을 준수하여 고객응대근로자를 보호하고 있습니다.</li>
-                            <li>성희롱, 욕설 등의 폭언을 하지 말아주세요. 폭언 시 상담이 제한되고 법령에 따라 조치될 수 있습니다.</li>
-                        </ul>
-                    </div>
-                    <div class="inquiry_box">
-                        <form action="/mypage/inquiry" method="post">
-                            <table class="inquiry_table">
-                                <tr>
-                                    <th>문의 유형</th>
-                                    <td>
-                                        <div class="inquiry_table_wrap">
-                                            <div class="inquiry_type_select_box input_wrap" data-state="closed">
-                                                <select id="inquiry-type" name="type" class="inquiry_type" required>
-                                                    <option value hidden>문의 유형을 먼저 선택 후 입력해 주세요.</option>
-                                                    <option value="general">일반 문의</option>
-                                                    <option value="product">제품 문의</option>
-                                                    <option value="service">서비스 문의</option>
-                                                    <!-- 기타 옵션 추가 가능 -->
-                                                </select>
-                                                <i class="ic ic_arrow_down"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>내용</th>
-                                    <td>
-                                        <div class="inquiry_table_wrap">
-                                            <div class="inquiry_title_wrap input_wrap" style="margin-bottom: 15px;">
-                                                <input type="text" id="title" name="title" placeholder="제목을 입력해 주세요." required>
-                                            </div>
-
-                                            <div class="inquiry_content_wrap input_wrap">
-                                                <textarea id="content" name="content" class="content" placeholder="문의 내용을 작성해 주세요." maxlength="500" required></textarea>
-                                                <div class="text_count"><span>0/500</span></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>사진 첨부</th>
-                                    <td>
-                                        <div class="inquiry_table_wrap">
-                                            <div class="inquiry_photo_wrap empty">
-                                                <input type="file" id="files" name="files" accept="image/jpeg, image/png, image/gif" class="btn files_btn" multiple>
-                                                <span class="file_info">JPG, PNG, GIF 파일만 1장 업로드 가능합니다.</span>
-                                            </div>
-
-                                            <div class="inquiry_photo_wrap have" style="display: none;"> <!-- 사진이 있을 때 -->
-                                                <span class="center">
-                                                    <i class="ic ic_photo"></i>
-                                                    <span class="photo_name">9788901290157.jpg</span>
-                                                </span>
-                                                <button>
-                                                    <span class="center">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                                                        </svg>
-                                                        <span>삭제</span>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <p class="inquiry_info_p">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-envelope-exclamation" viewBox="0 0 16 16">
-                                    <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
-                                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1.5a.5.5 0 0 1-1 0V11a.5.5 0 0 1 1 0m0 3a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
+            <div class="myPage_header"></div>
+            <div class="myPage_inner inner">
+                <div class="myPage_left">
+                    <a href="" class="myPage_profile">
+                        <div class="member_profile_photo_area">
+                            <div class="member_profile_photo"></div>
+                            <i class="ic ic_member_profile_pencil">
+                                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M30.1896 9.74448L24.2556 3.80909C24.0582 3.61172 23.8239 3.45515 23.5661 3.34833C23.3082 3.2415 23.0319 3.18652 22.7528 3.18652C22.4737 3.18652 22.1973 3.2415 21.9395 3.34833C21.6816 3.45515 21.4473 3.61172 21.25 3.80909L4.8729 20.1875C4.67472 20.3841 4.51759 20.6182 4.41066 20.8761C4.30373 21.1339 4.24912 21.4105 4.25001 21.6896V27.625C4.25001 28.1886 4.47389 28.7291 4.87241 29.1276C5.27092 29.5261 5.81143 29.75 6.37501 29.75H12.3104C12.5896 29.7509 12.8661 29.6963 13.124 29.5894C13.3819 29.4824 13.6159 29.3253 13.8125 29.1271L30.1896 12.75C30.387 12.5527 30.5436 12.3184 30.6504 12.0606C30.7572 11.8027 30.8122 11.5264 30.8122 11.2473C30.8122 10.9682 30.7572 10.6918 30.6504 10.4339C30.5436 10.1761 30.387 9.94181 30.1896 9.74448ZM6.81462 21.25L18.0625 10.0021L20.2792 12.2188L9.03126 23.4653L6.81462 21.25ZM6.37501 23.8146L10.1854 27.625H6.37501V23.8146ZM12.75 27.1854L10.5334 24.9688L21.7813 13.7209L23.9979 15.9375L12.75 27.1854ZM25.5 14.4354L19.5646 8.50003L22.7521 5.31253L28.6875 11.2466L25.5 14.4354Z" fill="white"/>
                                 </svg>
-                                <span>문의에 대한 답변 등록 시 알려드립니다.</span>
-                            </p>
-                            <table class="inquiry_table">
-                                <tr>
-                                    <th>연락처</th>
-                                    <td>
-                                        <div class="inquiry_table_wrap">
-                                            <div class="inquiry_title_wrap input_wrap">
-                                                <input type="text" id="phoneNum" name="phoneNum" th:value="${memberVO.phoneNumber}" placeholder="연락처를 입력해 주세요." required>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>이메일</th>
-                                    <td>
-                                        <div class="inquiry_email_wrap input_wrap">
-                                            <input type="email" id="email" name="email" th:value="${memberVO.email}" placeholder="이메일을 입력해 주세요." required>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
+                            </i>
+                        </div>
+                        <div class="member_name">
+                            <span><span id="memberName">홍길동</span>님</span> <span id="memberGrade">새싹</span>
+                        </div>
+                        <div class="member_email"> <span>(example@example.com)</span></div>
+                    </a>
 
-                    <div class="inquiry_btn_area">
-                        <button type="reset" class="inquiry_reset_btn">취소하기</button>
-                        <button type="submit" class="inquiry_submit_btn">문의하기</button>
+                    <div class="myPage_menu">
+                        <div class="myPage_menu_item">
+                            <p class="menu_item_title"><a href="">쇼핑 내역<i class="ic ic_arrow_right"></i></a></p>
+                            <p class="menu_item_content"><a href="">주문/배송목록</a></p>
+                            <p class="menu_item_content"><a href="">선물함</a></p>
+                            <p class="menu_item_content"><a href="">매장 구매 내역</a></p>
+                            <p class="menu_item_content"><a href="">영수증</a></p>
+                        </div>
+                        <div class="myPage_menu_item">
+                            <p class="menu_item_title"><a href="">나의 통장<i class="ic ic_arrow_right"></i></a></p>
+                            <p class="menu_item_content"><a href="">통합 포인트</a></p>
+                            <p class="menu_item_content"><a href="">쿠폰</a></p>
+                            <p class="menu_item_content"><a href="">기프트카드</a></p>
+                        </div>
+                        <div class="myPage_menu_item">
+                            <p class="menu_item_title"><a href="">회원정보<i class="ic ic_arrow_right"></i></a></p>
+                            <p class="menu_item_content"><a href="">배송주소록</a></p>
+                            <p class="menu_item_content"><a href="">회원정보관리</a></p>
+                            <p class="menu_item_content"><a href="">나의 회원등급</a></p>
+                        </div>
+                        <div class="myPage_menu_item">
+                            <p class="menu_item_title"><a href="">고객센터<i class="ic ic_arrow_right"></i></a></p>
+                            <p class="menu_item_content"><a href="">1:1 문의 내역</a></p>
+                            <p class="menu_item_content"><a href="">업체배송 문의내역</a></p>
+                        </div>
+                        <div class="myPage_menu_item item_last">
+                            <p class="menu_item_title"><a href="">도움이 필요하세요?</a></p>
+                            <p class="menu_item_content"><a href="">FAQ</a></p>
+                            <p class="menu_item_content"><a href="">1:1 고객 상담</a></p>
+                        </div>
                     </div>
                 </div>
 
+                <div class="myPage_right">
+                    
+                </div>
             </div>
         </main>
 
@@ -629,6 +568,5 @@
     </div>
     
     <script src="/js/header.js"> </script>
-    <script src="/js/inquiry.js"> </script>
 </body>
 </html>
