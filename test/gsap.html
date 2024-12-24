@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            width: 100%; /* 원하는 슬라이드 크기 */
+          }
+          
+          .carousel-track {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+          }
+          
+          .slide {
+            flex: 0 0 100%; /* 슬라이드 크기 */
+            text-align: center;
+            background: lightgray; /* 테스트용 배경 */
+            line-height: 200px; /* 테스트용 텍스트 정렬 */
+          }
+          
+          button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 10;
+          }
+          
+          .prev-btn {
+            left: 10px;
+          }
+          
+          .next-btn {
+            right: 10px;
+          }
+          
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <button class="prev-btn">〈</button>
+        <div class="carousel-track">
+          <div class="slide">4번째 아이템 (복제)</div>
+          <div class="slide">1번째 아이템</div>
+          <div class="slide">2번째 아이템</div>
+          <div class="slide">3번째 아이템</div>
+          <div class="slide">4번째 아이템</div>
+          <div class="slide">1번째 아이템 (복제)</div>
+        </div>
+        <button class="next-btn">〉</button>
+      </div>      
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+    const track = document.querySelector('.carousel-track');
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+const slideWidth = slides[0].clientWidth;
+
+let currentIndex = 1;
+let autoSlide;
+
+// 초기 위치 설정
+track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+
+// 슬라이드 이동 함수
+function moveToSlide(index) {
+  track.style.transition = 'transform 0.3s ease-in-out';
+  currentIndex = index;
+  track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+
+  // 끝에 도달했을 때 무한 루프 처리
+  track.addEventListener('transitionend', () => {
+    if (currentIndex === 0) {
+      track.style.transition = 'none';
+      currentIndex = slides.length - 2;
+      track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+    } else if (currentIndex === slides.length - 1) {
+      track.style.transition = 'none';
+      currentIndex = 1;
+      track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+    }
+  });
+}
+
+// 이전 버튼
+prevBtn.addEventListener('click', () => {
+  clearInterval(autoSlide); // 버튼 클릭 시 자동 슬라이드 초기화
+  moveToSlide(currentIndex - 1);
+  startAutoSlide(); // 버튼 클릭 후 자동 슬라이드 다시 시작
+});
+
+// 다음 버튼
+nextBtn.addEventListener('click', () => {
+  clearInterval(autoSlide);
+  moveToSlide(currentIndex + 1);
+  startAutoSlide();
+});
+
+// 자동 슬라이드
+function startAutoSlide() {
+  autoSlide = setInterval(() => {
+    moveToSlide(currentIndex + 1);
+  }, 3000);
+}
+
+// 자동 슬라이드 시작
+startAutoSlide();
+</script>
+
+</body>
+</html>
