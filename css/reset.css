@@ -178,6 +178,7 @@ button, input, select, textarea {
 .ic_plus {
     background-image: url("/image/svg/plus.svg");
 }
+.ic_coupon2 { background-image: url("/image/svg/coupon2.svg");}
 .ic_minus {
     background-image: url("/image/svg/minus.svg");
 }
