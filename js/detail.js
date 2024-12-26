@@ -153,10 +153,10 @@ document.addEventListener("DOMContentLoaded", () => {
         grid = document.getElementsByClassName("grid")[0];
         rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
         rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
-        rowSpan = Math.ceil((item.querySelector('.review_box').getBoundingClientRect().height + rowGap + 0.5) / (rowHeight + rowGap));
+        rowSpan = Math.ceil((item.querySelector('.review_box').getBoundingClientRect().height + rowGap+50) / (rowHeight + rowGap));
         item.style.gridRowEnd = "span " + rowSpan;
 
-        console.log(Math.ceil((item.querySelector('.review_box').getBoundingClientRect().height + rowGap))); // 여기에서 높이 확인
+        console.log(Math.ceil((item.querySelector('.review_box').getBoundingClientRect().height + rowGap+50))); // 여기에서 높이 확인
     }
     
     function resizeAllGridItems() {
