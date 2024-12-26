@@ -114,8 +114,8 @@
     display: grid;
     break-inside: avoid;
     transition: transform 0.1s ease-out;
-  }
-  
+}
+
 .book-image {
     line-height: 0;
     position: relative;
@@ -124,14 +124,14 @@
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 }
-  
+
 .book-image img {
     grid-row: 1 / -1;
     grid-column: 1;
     width: 100%;
     border-radius: 2px 6px 6px 2px;
 }
-  
+
 .effect {
     position: absolute;
     width: 20px;
@@ -140,7 +140,7 @@
     top: 0;
     border-left: 2px solid #00000010;
     background-image: linear-gradient(
-      90deg, rgba(255, 255, 255, 0.2) 0%,rgba(255, 255, 255, 0) 100%
+            90deg, rgba(255, 255, 255, 0.2) 0%,rgba(255, 255, 255, 0) 100%
     );
     transition: all 0.5s ease;
     z-index: 5;
@@ -151,9 +151,9 @@
     position: absolute;
     border-radius: 3px;
     background-image: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.2) 100%
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.2) 100%
     );
     top: 0;
     right: 0;
@@ -188,7 +188,7 @@
     margin: 0 4px 20px 4px;
     font-size: 12px;
     color: #555;
-    
+
     border: 1px solid #c6c6c6;
     border-radius: 7px;
 }
@@ -209,7 +209,7 @@
     font-size: 30px;
     line-height: 45px;
     font-weight: 700;
-    
+
     display: -webkit-box;
     -webkit-line-clamp: 2; /* 최대 2줄로 제한 */
     -webkit-box-orient: vertical; /* 세로 방향 정렬 */
@@ -228,7 +228,7 @@
     content: '·';
     display: inline-block;
     color: #555;
-    margin-left: 6px;
+    margin: 0 6px;
 }
 
 .book_info {
@@ -423,37 +423,40 @@
     position: relative;
     min-height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 100px 0;
     line-height: 1.5em;
     width: 100%;
+    border-bottom: 1px solid #c6c6c6;
+}
+.book_detail_page_title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 auto 50px 0;
 }
 
-.book {
-    transition: opacity 0.4s 0.2s;
-  }
-  .book p{
+.book {transition: opacity 0.4s 0.2s;}
+.book p{
     text-align:start;
     font-size: 1rem;
     color: #000000;
-  }
-  .page .page-inner:first-of-type {
+}
+.page .page-inner:first-of-type {
     margin-top: 3vw;
     margin-bottom: 5vh;
-    border-bottom: 1px solid #c6c6c6;
 }
 .page-inner {
-    min-height: 20%;
-    max-height: 50%;
     margin: 5px 10px 10px 35px;
-    overflow: visible;
+    overflow: hidden;
 }
 .page .book_detail_content {
+    height: auto;
+    max-height: 33vh;
     font-size: 0.9rem;
-    max-height: 25vh;
     overflow-x: hidden; /* 가로 스크롤 숨김 */
-    overflow-y: scroll; /* 세로 스크롤 유지 */
+    overflow-y: hidden scroll; /* 세로 스크롤 유지 */
     word-wrap: break-word; /* 단어가 넘치면 줄바꿈 */
     word-break: break-word; /* 단어 단위로 줄바꿈 */
     white-space: normal; /* 텍스트가 줄바꿈되도록 설정 */
@@ -463,31 +466,25 @@
     padding: 10px 0;
     color: #555555;
 }
-.page .book_detail_title {
-    font-size: 1.7rem;
-}
-  .page:nth-child(even) {
-    clear: both;
-  }
-  .book {
-    perspective: 250vw;
-  }
-  .book .pages {
-    width: 60vw;
-    height: 36vw;
+.page .book_detail_title { font-size: 1.7rem; }
+.page:nth-child(even) { clear: both; }
+.book { perspective: 250vw; }
+.book .pages {
+    width: 75vw;
+    height: 40vw;
     position: relative;
     transform-style: preserve-3d;
     backface-visibility: hidden;
     border-radius: 4px;
     /*box-shadow: 0 0 0 1px #e3dfd8;*/
-  }
-  .book .page {
+}
+.book .page {
     float: none;
     clear: none;
     margin: 0;
     position: absolute;
     top: 0;
-    width: 30vw;
+    width: calc(75vw / 2);
     height: 100%;
     transform-origin: 0 0;
     transition: transform 1.4s;
@@ -498,8 +495,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-  }
-  .book .page:before {
+}
+.book .page:before {
     content: '';
     position: absolute;
     top: 0;
@@ -510,25 +507,15 @@
     transition: background 0.7s;
     z-index: 2;
     pointer-events: none;
-  }
-  .book .page:nth-child(odd) {
+}
+.book .page:nth-child(odd) {
     pointer-events: all;
     transform: rotateY(0deg);
     right: 0;
     border-radius: 0 4px 4px 0;
     background-image: linear-gradient(to right, rgba(0,0,0,.15) 0%, rgba(0,0,0,0) 10%);
-  }
-  /*
-  .book .page:nth-child(odd):hover {
-    transform: rotateY(-15deg);
-  }
-  .book .page:nth-child(odd):hover:before {
-    background: rgba(0, 0, 0, 0.03);
-  }
-  .book .page:nth-child(odd):before {
-    background: rgba(0, 0, 0, 0);
-  }*/
-  .book .page:nth-child(even) {
+}
+.book .page:nth-child(even) {
     pointer-events: none;
     transform: rotateY(180deg);
     transform-origin: 100% 0;
@@ -536,78 +523,66 @@
     border-radius: 4px 0 0 4px;
     border-color: black;
     background-image: linear-gradient(to left, rgba(0,0,0,.12) 0%, rgba(0,0,0,0) 10%);
-  }
-  .book .page:nth-child(even):before {
-    background: rgba(0, 0, 0, 0.2);
-  }
-  .book .page.grabbing {
-    transition: none;
-  }
-  .book .page.flipped:nth-child(odd) {
+}
+.book .page:nth-child(even):before { background: rgba(0, 0, 0, 0.2);}
+.book .page.grabbing {transition: none;}
+.book .page.flipped:nth-child(odd) {
     pointer-events: none;
     transform: rotateY(-180deg);
-  }
-  .book .page.flipped:nth-child(odd):before {
-    background: rgba(0, 0, 0, 0.2);
-  }
-  .book .page.flipped:nth-child(even) {
+}
+.book .page.flipped:nth-child(odd):before { background: rgba(0, 0, 0, 0.2);}
+.book .page.flipped:nth-child(even) {
     pointer-events: all;
     transform: rotateY(0deg);
-  }
-  /*
-  .book .page.flipped:nth-child(even):hover {
-    transform: rotateY(15deg);
-  }
-  .book .page.flipped:nth-child(even):hover:before {
-    background: rgba(0, 0, 0, 0.03);
-  }*/
-  .book .page.flipped:nth-child(even):before {
-    background: rgba(0, 0, 0, 0);
-  }
-  .page:nth-child(odd){
-    background-position: right top;
-  }
-  .stickers {
+}
+/*
+.book .page.flipped:nth-child(even):hover {
+  transform: rotateY(15deg);
+}
+.book .page.flipped:nth-child(even):hover:before {
+  background: rgba(0, 0, 0, 0.03);
+}*/
+.book .page.flipped:nth-child(even):before {background: rgba(0, 0, 0, 0);}
+.page:nth-child(odd){background-position: right top;}
+.stickers {
     width: 100%;
     display: flex;
-  }
-  .stickers a {
+}
+.stickers a {
     width: calc((100% / 2) - 40px);
     height: auto;
     margin: 20px 20px 0 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .sticker {
+}
+.sticker {
     width: 100%;
     height: 100%;
     margin-bottom: 10px;
-  }
-  .sticker2, .sticker4 {
-    margin-right: 0;
-  }
-  .stickers span {
+}
+.sticker2, .sticker4 {margin-right: 0;}
+.stickers span {
     font-size: 0.9rem;
     color: #555;
-  }
+}
 
-  .sticker1 .sticker-img{
+.sticker1 .sticker-img{
     background-image: url("/image/event/택배.png");
     background-size: cover;
-  }
-  .sticker2 .sticker-img{
+}
+.sticker2 .sticker-img{
     background-image: url("/image/event/book.png");
     background-size: cover;
-  }
-  .sticker3 .sticker-img{
+}
+.sticker3 .sticker-img{
     background-image: url("/image/event/coupon.png");
     background-size: cover;
-  }
-  .sticker4 .sticker-img{
+}
+.sticker4 .sticker-img{
     background-image: url("/image/event/출석체크.png");
     background-size: cover;
-  }
+}
 
 /* 이미지 모달 스타일 */
 #imageModal {
@@ -666,7 +641,7 @@
     width: 600px;
     padding: 0 30px 10px 30px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    border-radius: 8px;
     z-index: 1000;
 }
 
@@ -768,4 +743,277 @@
     color: #fff;
     border-radius: 5px;
     letter-spacing: 10%;
+}
+
+.book_detail_review {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 100px 0;
+}
+
+.book_rate_score_box {
+    width: 75vw;
+    display: flex;
+    padding: 40px;
+    font-size: 17px;
+    border: 1px solid #c6c6c6;
+    border-radius: 12px;
+    word-break: keep-all;
+    background-color: #f8f8f8;
+    position: relative;
+    margin: 0 auto 100px;
+}
+.book_rate_score_box::before {
+    content: ""; /* 가상요소를 표시하기 위한 필수 설정 */
+    position: absolute; /* 위치 조정을 위해 absolute 사용 */
+    width: 0.1px; /* 막대의 너비 */
+    height : 60%; /* 막대의 높이 */
+    background-color: #c6c6c6; /* 막대의 색상 */
+    top: 50%; /* 부모 요소의 세로 중심 */
+    left: 43%; /* 부모 요소의 가로 중심 */
+    transform: translate(-43%, -50%); /* 정확한 가운데 위치 조정 */
+  }
+.book_rate_score_left, .book_rate_score_right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+.book_rate_score_left {
+    width: 45%;
+    padding: 0 30px;
+}
+.book_rate_score_right {
+    width: 55%;
+    padding: 0 0 0 40px;
+}
+
+.book_rate_score_left > p{
+    font-size: 1.2rem;
+}
+.book_rate_score_left > span {
+    color: #555;
+}
+.book_rate_score_left > span > strong {
+    font-size: 1.5rem;
+    color: #39553F;
+}
+.book_rate_score_left .ic_star {
+    width: 200px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.rate {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+.rate > div {
+    display: flex;
+    align-items: center;
+}
+.rate_1 {width: 30%;}
+.rate_2 {width: 60%;}
+.rate_3 {
+    width: 10%;
+    justify-content: end;
+}
+.rating-users-count {
+    font-size: 0.8rem;
+    color: #555;
+    margin-left: 5px;
+}
+.book_rate_score_right .ic_star {
+    width: 100px;
+    height: 20px;
+}
+.gauge_bar {
+    width: 330px;
+    height: 20px;
+    position: relative;
+    background-color: #F0F0F0;
+    border-radius: 50px;
+}
+.rate > span {
+    font-size: 1.1rem;
+    line-height: 25px;
+}
+.gauge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+    background-color: #ABBC86;
+}
+
+.grid {
+    display: grid;
+    grid-gap: 50px;
+    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+    grid-auto-rows: 59px;
+    position: relative;
+}
+
+.review_item {
+    background-color: white;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.5);
+    transition: all 0.3s ease; /* 부드러운 효과 */
+    z-index: 0; /* 기본 z-index */
+}
+.review_item::before{
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    top: -15px;
+    left: 30%;
+    background-image: url("/image/tape.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+}
+
+
+.review_item.expanded {
+    position: fixed; /* 화면 고정 */
+    top: 45%; /* 화면 가운데로 이동 (위에서 50%) */
+    left: 50%; /* 화면 가운데로 이동 (왼쪽에서 50%) */
+    transform: translate(-50%, -50%) scale(1.1); /* 가운데 정렬 및 확대 */
+    width: 80vw; /* 확장된 너비 */
+    height: 75vh; /* 높이는 내용에 맞게 */
+    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    z-index: 10; /* 다른 요소 위로 표시 */
+    transition: all 0.3s ease-in-out; /* 부드러운 애니메이션 */
+}
+.review_item.expanded::before {
+    content: none; /* 가상 요소를 제거 */
+}
+.review_item.expanded > * {transform: scale(1);}
+.review_item.expanded .review_content {
+    flex-direction: row;
+}
+.review_item.expanded .review_content > p {
+    height: 70vh;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    overflow-y: hidden scroll;
+}
+.review_item.expanded img {
+    max-width: 350px;
+    max-height: 350px;
+    margin: 0 20px 20px 0;
+}
+.review_box > .ic_delete {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    display: none;
+}
+.review_item.expanded .ic_delete {
+  display: block; /* 확장된 상태에서만 보이게 */
+}
+
+.review_box {background-color: transparent;}
+.review_box > div {
+    width: 100%;
+    padding: 12px 24px;
+    display: flex;
+}
+.review_box_header, .review_content {flex-direction: column;}
+.review_box_header {margin-top: 12px;}
+.review_content {margin-bottom: 12px;}
+
+.review_member, .review_info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.member_nike_name {
+    font-size: 1rem;
+    color: #555;
+}
+.review_date {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.member_profile_photo {
+    background-image: url(https://contents.kyobobook.co.kr/resources/fo/images/common/ink/img_no_profile@2x.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin-right: 12px;
+}
+
+.review_info {
+    width: 100%;
+    padding: 0 2px;
+    justify-content: space-between;
+}
+.review_content > p {
+    display: -webkit-box; /* Flexbox 기반으로 텍스트 자르기 */
+    -webkit-box-orient: vertical; /* 텍스트가 수직 방향으로 흐르도록 설정 */
+    overflow: hidden; /* 초과 텍스트 숨기기 */
+    text-overflow: ellipsis; /* 말줄임표(...) 추가 */
+    -webkit-line-clamp: 19; /* 최대 19줄로 제한하고 말줄임표 추가 */
+    line-height: 1.5; /* 줄 간격 설정 */
+    max-height: calc(1.5em * 19); /* 19줄 높이로 제한 */
+}
+
+.review_content > img {
+    display: block;
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: contain;
+    margin: 0px auto;
+    margin-bottom: 24px;
+}
+
+.pagenation_area {
+    margin-top: 100px;
+}
+.pagenation_area, .pagenation, .pagenation_num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pagenation {
+    justify-content: space-around;
+    gap: 2.2rem;
+}
+.pagenation i {
+    width: 31px;
+    height: 31px;
+}
+.pagenation_num {
+    gap: 2rem;
+    align-items: center;
+}
+.pagenation_num a {
+    font-size: 15px;
+    line-height: 24px;
+    color: #555;
+}
+.pagenation_num .present {
+    padding: 3px 10.7px;
+    background-color: #497248;
+    border-radius: 9999px;
+}
+.pagenation_num .present a {
+    color: white;
 }

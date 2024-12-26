@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // 모달 닫기 이벤트
-        const closeButton = modal.querySelector(".ic_delete");
+        const closeButton = modal.querySelector(".book_benefits_modal .ic_delete");
         if (closeButton) {
             closeButton.addEventListener("click", function (event) {
                 event.stopPropagation(); // 클릭 이벤트 전파 방지
@@ -117,5 +117,100 @@ document.addEventListener("DOMContentLoaded", () => {
             value--;
             number.textContent = value;
         }
+    });
+
+    // 별점 게이지 넓이 계산
+    const rateElements = document.querySelectorAll(".rate");
+
+    rateElements.forEach((rate) => {
+        const scoreElement = rate.querySelector(".score_number");
+        const gaugeElement = rate.querySelector(".gauge");
+
+        // data-value 속성에서 점수 가져오기
+        const score = parseInt(scoreElement.getAttribute("data-value"), 10);
+
+        // 점수에 따른 width 계산
+        let widthPercentage = 0;
+        if (score == 0) widthPercentage = 0;
+        else if (score <= 10) widthPercentage = 10;
+        else if (score <= 19) widthPercentage = 20;
+        else if (score <= 29) widthPercentage = 30;
+        else if (score <= 39) widthPercentage = 40;
+        else if (score <= 49) widthPercentage = 50;
+        else if (score <= 59) widthPercentage = 60;
+        else if (score <= 69) widthPercentage = 70;
+        else if (score <= 79) widthPercentage = 80;
+        else if (score <= 89) widthPercentage = 90;
+        else if (score <= 100) widthPercentage = 100;
+
+        // width 적용
+        const gaugeWidth = (330 * widthPercentage) / 100;
+        gaugeElement.style.width = `${gaugeWidth}px`;
+    });
+
+    // 리뷰 그리드 계산
+    function resizeGridItem(item) {
+        grid = document.getElementsByClassName("grid")[0];
+        rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+        rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
+        rowSpan = Math.ceil((item.querySelector('.review_box').getBoundingClientRect().height + rowGap + 0.5) / (rowHeight + rowGap));
+        item.style.gridRowEnd = "span " + rowSpan;
+
+        console.log(Math.ceil((item.querySelector('.review_box').getBoundingClientRect().height + rowGap))); // 여기에서 높이 확인
+    }
+    
+    function resizeAllGridItems() {
+        allItems = document.getElementsByClassName("review_item");
+        for (x = 0; x < allItems.length; x++) {
+            resizeGridItem(allItems[x]);
+        }
+    }
+    
+    function resizeInstance(instance) {
+        item = instance.elements[0];
+        resizeGridItem(item);
+    }
+    
+    window.onload = resizeAllGridItems();
+    window.addEventListener("resize", resizeAllGridItems);
+    
+    allItems = document.getElementsByClassName("review_item");
+    for (x = 0; x < allItems.length; x++) {
+        imagesLoaded(allItems[x], resizeInstance);
+    }
+
+    // 리뷰 클릭 시 크기 조정 계산
+    const reviewItems = document.querySelectorAll(".review_item");
+
+    reviewItems.forEach((item) => {
+        const deleteIcon = item.querySelector(".ic_delete");
+
+        item.addEventListener("click", () => {
+            console.log("클릭 이벤트 발생!"); // 클릭 이벤트 확인
+            if (item.classList.contains("expanded")) {
+                // 원래 상태로 복귀
+                item.classList.remove("expanded");
+            } else {
+                // 다른 review_item 초기화
+                reviewItems.forEach((el) => el.classList.remove("expanded"));
+                // 현재 review_item 확장
+                item.classList.add("expanded");
+            }
+        });
+
+        // 삭제 아이콘 클릭 시 원래 상태로 복귀
+        deleteIcon.addEventListener("click", (e) => {
+            e.stopPropagation(); // 부모 클릭 이벤트 방지
+            item.classList.remove("expanded");
+        });
+    });
+
+    // 반복 색상 배열
+    const colors = ["#F2E1A9", "#FEAF5E", "#FCCD00", "white", "#9AC9F1", "#D3B9DC", "#ABBC86"];
+
+    // 각 review_item에 색상 설정
+    reviewItems.forEach((item, index) => {
+        const color = colors[index % colors.length]; // 순환적으로 색상 선택
+        item.style.backgroundColor = color; // 배경색 설정
     });
 });

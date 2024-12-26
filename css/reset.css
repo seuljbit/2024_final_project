@@ -132,6 +132,7 @@ button, input, select, textarea {
 }
 .ic_delete {
     background-image: url("/image/svg/x.svg");
+    cursor: pointer;
 }
 .ic_search {
     background-image: url("/image/svg/search.svg");

@@ -75,8 +75,8 @@ body {
             <div class="title">
               <h3>1: Blog Post</h3>
             </div>
-            <div class="desc">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis fringilla laoreet. Mauris mattis enim ut felis consectetur, vitae lacinia enim auctor. Aenean vitae fermentum odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum non orci ut dignissim. Fusce fermentum felis aliquam, mattis nibh ut, faucibus leo. Sed lectus libero, volutpat at eros quis, venenatis tempus neque. Nulla vel faucibus orci, nec convallis ligula. Quisque maximus gravida orci, in lacinia mauris pretium nec. Sed et enim bibendum, fermentum tellus eu, eleifend ex. Aliquam lectus magna, sollicitudin vitae placerat ac, semper ut risus. Nunc vestibulum lacus et nulla volutpat auctor.</p>
+              <div class="desc">
             </div>
           </div>
         </div>
@@ -152,8 +152,8 @@ body {
             <div class="title">
               <h3>8: Blog Post</h3>
             </div>
-            <div class="desc">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis fringilla laoreet. Mauris mattis enim ut felis consectetur, vitae lacinia enim auctor. Aenean vitae fermentum odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum non orci ut dignissim. Semper ut risus. </p>
+              <div class="desc">
             </div>
           </div>
         </div>
@@ -1163,34 +1163,35 @@ body {
           </div>
         </div>
       </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js"></script>
       <script>
         function resizeGridItem(item){
-  grid = document.getElementsByClassName("grid")[0];
-  rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-  rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
-  rowSpan = Math.ceil((item.querySelector('.content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
-    item.style.gridRowEnd = "span "+rowSpan;
-}
+          grid = document.getElementsByClassName("grid")[0];
+          rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+          rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
+          rowSpan = Math.ceil((item.querySelector('.content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+          item.style.gridRowEnd = "span "+rowSpan;
+        }
 
-function resizeAllGridItems(){
-  allItems = document.getElementsByClassName("item");
-  for(x=0;x<allItems.length;x++){
-    resizeGridItem(allItems[x]);
-  }
-}
+        function resizeAllGridItems(){
+          allItems = document.getElementsByClassName("item");
+          for(x=0;x<allItems.length;x++){
+            resizeGridItem(allItems[x]);
+          }
+        }
 
-function resizeInstance(instance){
-	item = instance.elements[0];
-  resizeGridItem(item);
-}
+        function resizeInstance(instance){
+          item = instance.elements[0];
+          resizeGridItem(item);
+        }
 
-window.onload = resizeAllGridItems();
-window.addEventListener("resize", resizeAllGridItems);
+        window.onload = resizeAllGridItems();
+        window.addEventListener("resize", resizeAllGridItems);
 
-allItems = document.getElementsByClassName("item");
-for(x=0;x<allItems.length;x++){
-  imagesLoaded( allItems[x], resizeInstance);
-}
+        allItems = document.getElementsByClassName("item");
+        for(x=0;x<allItems.length;x++){
+          imagesLoaded( allItems[x], resizeInstance);
+        }
       </script>
 </body>
 </html>
