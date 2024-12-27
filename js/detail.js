@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+    Sticker.init('.sticker');
+    
     // 책 이미지 움직임 이벤트
     const wrapper = document.querySelector('.book_thum_wrap');
     const book = document.querySelector('.book-items');
@@ -182,35 +184,31 @@ document.addEventListener("DOMContentLoaded", () => {
     // 리뷰 클릭 시 크기 조정 계산
     const reviewItems = document.querySelectorAll(".review_item");
 
-    reviewItems.forEach((item) => {
-        const deleteIcon = item.querySelector(".ic_delete");
-
-        item.addEventListener("click", () => {
-            console.log("클릭 이벤트 발생!"); // 클릭 이벤트 확인
-            if (item.classList.contains("expanded")) {
-                // 원래 상태로 복귀
-                item.classList.remove("expanded");
-            } else {
-                // 다른 review_item 초기화
-                reviewItems.forEach((el) => el.classList.remove("expanded"));
-                // 현재 review_item 확장
-                item.classList.add("expanded");
-            }
-        });
-
-        // 삭제 아이콘 클릭 시 원래 상태로 복귀
-        deleteIcon.addEventListener("click", (e) => {
-            e.stopPropagation(); // 부모 클릭 이벤트 방지
-            item.classList.remove("expanded");
-        });
-    });
-
     // 반복 색상 배열
-    const colors = ["#F2E1A9", "#FEAF5E", "#FCCD00", "white", "#9AC9F1", "#D3B9DC", "#ABBC86"];
+    const colors = ["#F2E1A9", "white", "#ABBC86"];
 
     // 각 review_item에 색상 설정
     reviewItems.forEach((item, index) => {
         const color = colors[index % colors.length]; // 순환적으로 색상 선택
         item.style.backgroundColor = color; // 배경색 설정
+    });
+
+    // 좋아요 버튼
+    //https://codepen.io/nodws/pen/qZLBrd?editors=1011
+    //https://codepen.io/akm2/pen/rHIsa
+
+    // 모든 .panel 요소 선택
+    var panels = document.querySelectorAll('.panel');
+
+    // 각 .panel 요소에 클릭 이벤트 바인딩
+    panels.forEach(function(panel) {
+        panel.addEventListener('click', function() {
+            // .panel 안의 a.like1 요소 선택
+            var likeAnchor = panel.querySelector('a.like1');
+            if (likeAnchor) {
+            // 클릭된 요소에 active 클래스 토글
+            likeAnchor.classList.toggle('active');
+            }
+        });
     });
 });

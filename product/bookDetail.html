@@ -668,7 +668,7 @@
                     </div>
 
                     <div class="book_detail_review">
-                        <h3 class="book_detail_page_title">책 리뷰(3)</h3>
+                        <h3 class="book_detail_page_title">책 리뷰(3)</h3> <!-- 해당 책의 전체 리뷰 수 괄호 안 -->
 
                         <div class="book_rate_score_box">
                             <div class="book_rate_score_left">
@@ -765,8 +765,18 @@
                             </div>
                         </div>
 
+                        <div class="book_detail_review_none" style="display: none;"> <!-- 책의 리뷰가 없을 때 style="display: block;" -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8" fill="#c6c6c6"></circle>
+                                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" fill="white"></path>
+                            </svg>
+                            <p class="title">아직 작성된 리뷰가 없어요.</p>
+                            <p class="sub">이 책의 첫 리뷰어가 되어보세요!</p>
+                            <a href="">계속 쇼핑하기</a> <!-- 메인 페이지로 이동 -->
+                        </div>
+
                         <div class="book_review_box grid">
-                            <div class="review_item">
+                            <div class="review_item"> <!-- 리뷰 반복 -->
                                 <div class="review_box">
                                     <i class="ic ic_delete"></i>
                                     <div class="review_box_header">
@@ -787,6 +797,16 @@
                                             vehicula nunc vel, tincidunt sapien. Aliquam erat volutpat. Morbi facilisis
                                             vehicula lorem, a congue nunc mollis at.
                                         </p>
+                                    </div>
+                                    <div class="review_like">
+                                        <strong class="like_count">1</strong>
+                                        <div class="panel">
+                                            <a href="javascript:void(0);" class="like1">
+                                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176.104 176.104">
+                                                <path d="M150.383 18.301a49.633 49.633 0 0 0-24.033-6.187c-15.394 0-29.18 7.015-38.283 18.015-9.146-11-22.919-18.015-38.334-18.015-8.704 0-16.867 2.259-24.013 6.187C10.388 26.792 0 43.117 0 61.878 0 67.249.874 72.4 2.457 77.219c8.537 38.374 85.61 86.771 85.61 86.771s77.022-48.396 85.571-86.771a49.09 49.09 0 0 0 2.466-15.341c0-18.754-10.388-35.074-25.721-43.577z"/>
+                                              </svg>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -993,7 +1013,6 @@
     <script src="/js/list.js"></script>
     <script src="/js/detail.js"></script>
     <script src="/js/sticker.min.js"></script>
-    <script type="text/javascript"> window.onload = function() {Sticker.init('.sticker');}</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js"></script>
     <script>    
         var pages = document.getElementsByClassName('page');

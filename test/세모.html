@@ -5,13 +5,395 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .s {
-            clip-path: polygon(100px 0px, 200px 200px, 0 200px);
-            background-color: aqua;
-        }
+  /*mixins*/
+a.like2, a.like1, a.like {
+   display: inline-block;
+   font-size: 45px;
+   outline: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   -o-user-select: none;
+   user-select: none;
+   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+   -khtml-tap-highlight-color: rgba(255, 255, 255, 0);
+   -moz-tap-highlight-color: rgba(255, 255, 255, 0);
+   -ms-tap-highlight-color: rgba(255, 255, 255, 0);
+   -o-tap-highlight-color: rgba(255, 255, 255, 0);
+   tap-highlight-color: rgba(255, 255, 255, 0);
+   -webkit-transition: all 100ms ease-in-out;
+   -khtml-transition: all 100ms ease-in-out;
+   -moz-transition: all 100ms ease-in-out;
+   -ms-transition: all 100ms ease-in-out;
+   -o-transition: all 100ms ease-in-out;
+   transition: all 100ms ease-in-out;
+}
+
+a.like2 svg, a.like1 svg, a.like svg {
+   height: 40px;
+   fill: #666;
+   -webkit-transition: all 100ms ease-in-out;
+   -khtml-transition: all 100ms ease-in-out;
+   -moz-transition: all 100ms ease-in-out;
+   -ms-transition: all 100ms ease-in-out;
+   -o-transition: all 100ms ease-in-out;
+   transition: all 100ms ease-in-out;
+   outline: none;
+}
+
+body {
+   padding: 100px;
+   font-family: Arial;
+   background: #d7d7d7;
+   text-align: center;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   -o-user-select: none;
+   user-select: none;
+   outline: none;
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+a {
+   text-decoration: none;
+}
+
+canvas {
+   position: absolute;
+}
+
+a.like {
+   color: #666;
+}
+
+a.like:active {
+   -webkit-transform: scale(1.1);
+   -khtml-transform: scale(1.1);
+   -moz-transform: scale(1.1);
+   -ms-transform: scale(1.1);
+   -o-transform: scale(1.1);
+   transform: scale(1.1);
+}
+
+a.like.active svg {
+   fill: #1e90ff;
+}
+
+a.like1 {
+   color: #666;
+}
+
+a.like1:active {
+   -webkit-transform: scale(0.8) translateY(2px);
+   -khtml-transform: scale(0.8) translateY(2px);
+   -moz-transform: scale(0.8) translateY(2px);
+   -ms-transform: scale(0.8) translateY(2px);
+   -o-transform: scale(0.8) translateY(2px);
+   transform: scale(0.8) translateY(2px);
+}
+
+a.like1.active svg {
+   fill: #ff5252;
+}
+
+a.like2 {
+   color: #666;
+   height: 38px;
+   margin-bottom: 14px;
+}
+
+a.like2:active {
+   -webkit-transform: scale(0.8) translateY(2px);
+   -khtml-transform: scale(0.8) translateY(2px);
+   -moz-transform: scale(0.8) translateY(2px);
+   -ms-transform: scale(0.8) translateY(2px);
+   -o-transform: scale(0.8) translateY(2px);
+   transform: scale(0.8) translateY(2px);
+}
+
+a.like2.active svg {
+   fill: #f0932b;
+}
+
+.panel {
+   border: 1px solid #c1c1c1;
+   display: inline-block;
+   width: 100px;
+   height: 106px;
+   background: #eee;
+   text-align: center;
+   margin-right: 10px;
+   padding-top: 15px;
+   -webkit-border-radius: 10px;
+   -khtml-border-radius: 10px;
+   -moz-border-radius: 10px;
+   -ms-border-radius: 10px;
+   -o-border-radius: 10px;
+   border-radius: 10px;
+   -webkit-box-shadow: 0px 2px 3px #999;
+   -khtml-box-shadow: 0px 2px 3px #999;
+   -moz-box-shadow: 0px 2px 3px #999;
+   -ms-box-shadow: 0px 2px 3px #999;
+   -o-box-shadow: 0px 2px 3px #999;
+   box-shadow: 0px 2px 3px #999;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   -o-user-select: none;
+   user-select: none;
+   outline: none;
+   overflow: hidden;
+}
+
+.panel .footer {
+   border-top: 1px solid #c1c1c1;
+   background: #e3e3e3;
+   color: #808080;
+   padding: 10px;
+   -webkit-text-shadow: 1px 1px #fff;
+   -khtml-text-shadow: 1px 1px #fff;
+   -moz-text-shadow: 1px 1px #fff;
+   -ms-text-shadow: 1px 1px #fff;
+   -o-text-shadow: 1px 1px #fff;
+   text-shadow: 1px 1px #fff;
+}
     </style>
 </head>
 <body>
-    <div class="s"></div>
-</body>
+    <div class="panel">
+      <a href="javascript:void(0);" class="like1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176.104 176.104">
+          <path d="M150.383 18.301a49.633 49.633 0 0 0-24.033-6.187c-15.394 0-29.18 7.015-38.283 18.015-9.146-11-22.919-18.015-38.334-18.015-8.704 0-16.867 2.259-24.013 6.187C10.388 26.792 0 43.117 0 61.878 0 67.249.874 72.4 2.457 77.219c8.537 38.374 85.61 86.771 85.61 86.771s77.022-48.396 85.571-86.771a49.09 49.09 0 0 0 2.466-15.341c0-18.754-10.388-35.074-25.721-43.577z"/>
+        </svg>
+      </a>
+    </div>
+    
+    <script>
+        //https://codepen.io/nodws/pen/qZLBrd?editors=1011
+        //https://codepen.io/akm2/pen/rHIsa
+
+/*-------------------------------like button ------------------------*/
+//all like anchors
+var likeAnchores = document.querySelectorAll('a.like');
+
+//bind click event to all like anchores
+likeAnchores.forEach(function(e,i){
+  e.addEventListener('click',explode);
+});
+
+//call on like anchors click
+function explode(e){
+  //toggle active class 
+  [].map.call(likeAnchores, function(el) {
+           el.classList.toggle('active');
+     });
+  
+  //element required position
+  var x = e.clientX;
+  var y = e.clientY;
+  
+  //canvas element
+  var canvasEl = document.createElement('canvas');
+  var ctx = canvasEl.getContext('2d');
+  document.body.appendChild(canvasEl);
+  
+  canvasEl.style.position = 'absolute';
+  canvasEl.style.left = (x - 50) + 'px';
+  canvasEl.style.top = (y - 50) + 'px';
+  canvasEl.height = 100;
+  canvasEl.width = 100;
+  
+  //particles
+  var particles = [];
+  function Particle() {
+    return {
+      x : canvasEl.width / 2,
+      y : canvasEl.height / 2,
+      dx : (Math.random() - 0.5) * 5,
+      dy : (Math.random() - 0.5) * 5,
+      speed: 0.2,
+      color : ['#00bcd4','#00bcd4','#0652DD','#0984e3'][Math.floor(Math.random() * 3) +1],
+      opacity: 1,
+      radius: 10,
+      frection: 0.5
+    }
+  }
+  
+  for(var i = 0; i < 12; i++){
+    particles.push(Particle());
+  }
+  
+  //render animation
+  function render(){
+    ctx.clearRect(0,0,100, 100);
+    particles.forEach(function(e,i){
+      
+      e.x -= e.dx;
+      e.y -= e.dy;
+      //e.radius -= e.speed;
+        
+      if(e.opacity < 0){ 
+        e.opacity -= 0.01;
+      }
+      
+      if(e.radius > 0){
+        e.radius -= 0.5;
+      }
+      e.speed *= e.frection;
+      ctx.beginPath();
+			ctx.globalAlpha = e.opacity;
+			ctx.fillStyle = e.color;
+			ctx.arc(e.x, e.y, e.radius, 0, 2 * Math.PI, false);
+			ctx.fill();
+      
+    });
+  } 
+  
+  (function renderLoop(){
+		requestAnimationFrame(renderLoop);
+		render();
+	})()
+	
+	setTimeout(function() {
+		document.body.removeChild(canvasEl);
+	}, 500)
+  
+}
+
+/*-------------------------------like button 1------------------------*/
+//all like anchors
+var likeAnchores1 = document.querySelectorAll('a.like1');
+
+//bind click event to all like anchores
+likeAnchores1.forEach(function(e,i){
+  e.addEventListener('click',explode1);
+});
+
+//call on like anchors click
+function explode1(e){
+  //toggle active class 
+  //toggle active class 
+  [].map.call(likeAnchores1, function(el) {
+           el.classList.toggle('active');
+     });
+  
+  //element required position
+  var x = e.clientX;
+  var y = e.clientY;
+  
+  //canvas element
+  var canvasEl1 = document.createElement('canvas');
+  var ctx1 = canvasEl1.getContext('2d');
+  document.body.appendChild(canvasEl1);
+  
+  canvasEl1.style.position = 'absolute';
+  canvasEl1.style.left = (x - 50) + 'px';
+  canvasEl1.style.top = (y - 50) + 'px';
+  canvasEl1.height = 100;
+  canvasEl1.width = 100;
+  
+  //particles
+  var particles1 = [];
+  function Particle1() {
+  console.log("r function",r);
+  
+    return {
+      x : canvasEl1.width / 2,
+      y : canvasEl1.height / 2,
+      rotation: r(0,360, true),
+      speed: 4,
+      color : ['#e84118','#c23616','#d63031','#ff7675'][Math.floor(Math.random() * 3) +1],
+      opacity: r(0,0.5, true),
+      radius: 8,
+      friction: 0.9,
+      yVel: 0,
+      gravity: 0
+    }
+  }
+  
+  for(var i = 0; i < 15; i++){ particles1.push(Particle1()); }
+  
+  //render animation
+  function render1(){
+    ctx1.clearRect(0,0,100, 100);
+    particles1.forEach(function(e,i){
+        angleTools.moveOnAngle(e, e.speed);
+        e.opacity -= 0.01;
+        e.speed *= e.friction;
+        e.radius *= e.friction;
+                
+        e.yVel += e.gravity;
+        e.y += e.yVel;
+                
+        if(e.opacity < 0) return;
+        if(e.radius < 0) return;
+        
+        ctx1.beginPath();
+        ctx1.globalAlpha = e.opacity;
+        ctx1.fillStyle = e.color;
+        ctx1.arc(e.x, e.y, e.radius, 0, 2 * Math.PI, false);
+        ctx1.fill();
+    });
+  } 
+  
+  (function renderLoop(){
+		requestAnimationFrame(renderLoop);
+		render1();
+	})()
+	
+	setTimeout(function() {
+		document.body.removeChild(canvasEl1);
+	}, 500)
+}
+
+var angleTools = {
+    getAngle: function(t, n) {
+        var a = n.x - t.x,
+            e = n.y - t.y;
+        return Math.atan2(e, a) / Math.PI * 180
+    },
+    getDistance: function(t, n) {
+        var a = t.x - n.x,
+            e = t.y - n.y;
+        return Math.sqrt(a * a + e * e)
+    },
+    getAnglePos: function(x, y, angle, distance, fromDistance) {
+        var newx = distance * Math.cos(angle * Math.PI / 180);
+        var newy = distance * Math.sin(angle * Math.PI / 180);
+        var destx = fromDistance * Math.cos(angle * Math.PI / 180);
+        var desty = fromDistance * Math.sin(angle * Math.PI / 180);
+        return { x : x + newx, y : y + newy , dx: x + newx + destx, dy : y + newy + desty };
+    },
+    moveOnAngleLine: function(particle, distance , distanceEp) {
+        var a = this.getOneFrameDistance(particle, distance);
+        particle.sp.x += a.x;
+        particle.sp.y += a.y;
+      
+      var b = this.getOneFrameDistance(particle, distanceEp);
+        particle.sp.dx += b.x;
+        particle.sp.dy += b.y;
+    },
+    moveOnAngle: function(t, n) {
+        var a = this.getOneFrameDistance(t, n);
+        t.x += a.x, t.y += a.y
+    },
+    getOneFrameDistance: function(t, n) {
+        return { x: n * Math.cos(t.rotation * Math.PI / 180), y: n * Math.sin(t.rotation * Math.PI / 180) }
+    }
+};
+
+function r(a, b, c) {
+    return parseFloat((Math.random() * ((a ? a : 1) - (b ? b : 0)) + (b ? b : 0)).toFixed(c ? c : 0));
+}
+    </script>
+  </body>
 </html>

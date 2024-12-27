@@ -470,7 +470,7 @@
 .page:nth-child(even) { clear: both; }
 .book { perspective: 250vw; }
 .book .pages {
-    width: 75vw;
+    width: 66vw;
     height: 40vw;
     position: relative;
     transform-style: preserve-3d;
@@ -484,7 +484,7 @@
     margin: 0;
     position: absolute;
     top: 0;
-    width: calc(75vw / 2);
+    width: calc(66vw / 2);
     height: 100%;
     transform-origin: 0 0;
     transition: transform 1.4s;
@@ -567,7 +567,7 @@
     color: #555;
 }
 
-.sticker1>.sticker-img{
+.sticker1 .sticker-img{
     background-image: url("/image/event/택배.png");
     background-size: cover;
 }
@@ -753,7 +753,7 @@
 }
 
 .book_rate_score_box {
-    width: 75vw;
+    width: 66vw;
     display: flex;
     padding: 40px;
     font-size: 17px;
@@ -883,36 +883,6 @@
     opacity: 0.9;
 }
 
-
-.review_item.expanded {
-    position: fixed; /* 화면 고정 */
-    top: 45%; /* 화면 가운데로 이동 (위에서 50%) */
-    left: 50%; /* 화면 가운데로 이동 (왼쪽에서 50%) */
-    transform: translate(-50%, -50%) scale(1.1); /* 가운데 정렬 및 확대 */
-    width: 80vw; /* 확장된 너비 */
-    height: 75vh; /* 높이는 내용에 맞게 */
-    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
-    z-index: 10; /* 다른 요소 위로 표시 */
-    transition: all 0.3s ease-in-out; /* 부드러운 애니메이션 */
-}
-.review_item.expanded::before {
-    content: none; /* 가상 요소를 제거 */
-}
-.review_item.expanded > * {transform: scale(1);}
-.review_item.expanded .review_content {
-    flex-direction: row;
-}
-.review_item.expanded .review_content > p {
-    height: 70vh;
-    font-size: 1.2rem;
-    line-height: 1.5rem;
-    overflow-y: hidden scroll;
-}
-.review_item.expanded img {
-    max-width: 350px;
-    max-height: 350px;
-    margin: 0 20px 20px 0;
-}
 .review_box > .ic_delete {
     position: absolute;
     width: 24px;
@@ -920,14 +890,10 @@
     top: 10px;
     right: 10px;
     cursor: pointer;
-    display: none;
-}
-.review_item.expanded .ic_delete {
-  display: block; /* 확장된 상태에서만 보이게 */
 }
 
 .review_box {background-color: transparent;}
-.review_box > div {
+.review_box_header, .review_content, .review_like {
     width: 100%;
     padding: 12px 24px;
     display: flex;
@@ -1016,4 +982,100 @@
 }
 .pagenation_num .present a {
     color: white;
+}
+
+.panel {
+    z-index: 2;
+    position: relative;
+}
+a.like1 {
+    display: inline-block;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -khtml-tap-highlight-color: rgba(255, 255, 255, 0);
+    -moz-tap-highlight-color: rgba(255, 255, 255, 0);
+    -ms-tap-highlight-color: rgba(255, 255, 255, 0);
+    -o-tap-highlight-color: rgba(255, 255, 255, 0);
+    tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-transition: all 100ms ease-in-out;
+    -khtml-transition: all 100ms ease-in-out;
+    -moz-transition: all 100ms ease-in-out;
+    -ms-transition: all 100ms ease-in-out;
+    -o-transition: all 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+ }
+ a.like1 svg {
+    height: 23px;
+    fill: #666;
+    -webkit-transition: all 100ms ease-in-out;
+    -khtml-transition: all 100ms ease-in-out;
+    -moz-transition: all 100ms ease-in-out;
+    -ms-transition: all 100ms ease-in-out;
+    -o-transition: all 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+    outline: none;
+ }
+
+ a.like1 { color: #666; }
+ a.like1.active svg { fill: #ff5252; }
+
+a.like1:active {
+   -webkit-transform: scale(0.8) translateY(2px);
+   -khtml-transform: scale(0.8) translateY(2px);
+   -moz-transform: scale(0.8) translateY(2px);
+   -ms-transform: scale(0.8) translateY(2px);
+   -o-transform: scale(0.8) translateY(2px);
+   transform: scale(0.8) translateY(2px);
+}
+
+.review_like {
+    padding-bottom: 0;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+
+.review_like > strong {
+    display: inline-block;
+    font-size: 1.1rem;
+    line-height: 26px;
+    padding-bottom: 4px;
+}
+
+.book_detail_review_none {
+    border-top: 2px solid #c6c6c6;
+    border-bottom: 2px solid #c6c6c6;
+    padding: 60px 0;
+    text-align: center;
+}
+.book_detail_review_none > svg {
+    margin-bottom: 15px;
+}
+.book_detail_review_none > .title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+.book_detail_review_none > .sub {
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 50px;
+}
+.book_detail_review_none > a {
+    border: 1px solid #497248;
+    background-color: #497248;
+    color : #fff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+.book_detail_review_none > a:hover {
+    border: 1px solid #39553F;
+    background-color: #39553F;
 }

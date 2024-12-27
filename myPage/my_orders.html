@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배송/주문내역</title>
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/myPage.css"/>
+    <link rel="stylesheet" href="/css/my_orders.css"/>
+</head>
+<body>
+    <div class="container">
+        <header id="main-header" class="default-header">
+            <div class="header_above">
+                <div class="inner">
+                    <div class="header_top_left">
+                        <a href="" class="link"> 고객센터 </a>
+                        <a href="" class="link"> 매장안내 </a>
+                        <a href="" class="link"> 회원혜택 </a>
+                    </div>
+                    
+                    <div class="header_top_right">
+                        <a href="" class="link"> 로그인 </a>
+                        <a href="" class="link"> 회원가입 </a>
+                        <a href="" class="link"> 주문배송 </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header_center">
+                <div class="inner">
+                    <div class="header_logo">
+                        <a href="/" class="ic ic_logo"></a>
+                    </div>
+
+                    <div class="header_search_wrap" tabindex="0">
+                        <form action="post" class="header_search">
+                            <div class="search_dropBox_wrap">
+                                <select name="search_type" id="searchType" name="type">
+                                    <option value="tap" th:selected="${ph.pgvo.type eq 'tap'? true : false }" selected> 통합검색 </option>
+                                    <option value="t" th:selected="${ph.pgvo.type eq 't'? true : false }"> 책제목 </option>
+                                    <option value="a" th:selected="${ph.pgvo.type eq 'a'? true : false }"> 작가명 </option>
+                                    <option value="p" th:selected="${ph.pgvo.type eq 'p'? true : false }"> 출판사 </option>
+                                 </select>
+                            </div>
+                            <input type="hidden" name="pageNo" th:value="1">
+                            <input type="hidden" name="qty" th:value="${ph.pgvo.qty }">
+
+                             <div class="search_input_wrap">
+                                <input type="search" name="keyword" th:value="${ph.pgvo.keyword}" class="search_keyword" placeholder="검색어를 입력해 주세요.">
+                            </div>
+
+                            <div class="search_btn_wrap">
+                                <button type="submit" class="search_btn">
+                                    <i class="ic ic_search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="header_user_wrap">
+                        <ul class="user_menu_list">
+                            <li class="user_menu_item"> <i class="ic ic_cart"></i></li>
+                            <li class="user_menu_item"> <i class="ic ic_bell"></i> </li>
+                            <li class="user_menu_item"> <i class="ic ic_myPage"></i> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header_below">
+                <div class="nav_category">
+                    <div class="inner">
+                        <div class="nav_all"> <!-- 전체 카테고리 항목 -->
+                            <div class="nav_all_inner">
+                                <button type="button" class="btn btn_nav">
+                                    <i class="ic ic_menu"></i>
+                                    <i class="ic ic_menu_close" style="display: none;"></i>
+                                    <span> 전체 카테고리 </span>
+                                </button>
+                            </div>
+
+                            <!-- 메뉴(모달창) -->
+                            <div class="modal_main_menu">
+                                <div class="modal_inner">
+
+                                    <div class="main_category1_wrap">
+                                        <div class="ic_prev_area"> <i class="ic ic_prev"></i> </div>
+                                        <div class="category1_slide">
+                                            <div class="category1_list">
+                                                <ul class="category1_menu_1">
+                                                    <li data-category="literature" class="active"><span>소설</span></li>
+                                                    <li data-category="poetry"><span>시/에세이</span></li>
+                                                    <li data-category="economy"><span>경제/경영</span></li>
+                                                    <li data-category="improvement"><span>자기계발</span></li>
+                                                    <li data-category="humanities"><span>인문</span></li>
+                                                    <li data-category="history"><span>역사</span></li>
+                                                    <li data-category="society"><span>사회/정치</span></li>
+                                                    <li data-category="natural"><span>자연/과학</span></li>
+                                                    <li data-category="art"><span>예술/대중문화</span></li>
+                                                    <li data-category="religion"><span>종교</span></li>
+                                                </ul>
+                                                
+                                                <ul class="category1_menu_2">
+                                                    <li data-category="child"><span>유아/어린이</span></li>
+                                                    <li data-category="home"><span>가정/요리</span></li>
+                                                    <li data-category="travel"><span>여행</span></li>
+                                                    <li data-category="language"><span>언어</span></li>
+                                                    <li data-category="it"><span>컴퓨터/IT</span></li>
+                                                    <li data-category="teenager"><span>청소년</span></li>
+                                                    <li data-category="certificate"><span>수험서/자격증</span></li>
+                                                    <li data-category="comics"><span>만화</span></li>
+                                                    <li data-category="magazine"><span>잡지</span></li>
+                                                    <li data-category="health"><span>건강/취미</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="ic_next_area"> <i class="ic ic_next"></i> </div>
+                                    </div>
+                            
+                                    <!-- 서브 메뉴 -->
+                                    <div class="main_category2">
+                                        <div class="menu-content active" id="literature">
+                                            <ul>
+                                                <li><a href="">소설 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">세계 각국 소설 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">한국소설 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">고전/문학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">장르소설 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">테마문학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">비평/창작/이론 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">신화/전설/설화 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">희곡/시나리오 <i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-content" id="poetry">
+                                            <ul>
+                                                <li><a href="">시/에세이 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">한국시 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">외국시 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">그림/사진 에세이 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">독서 에세이 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">명상 에세이 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">성공 에세이 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">여행 에세이 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">연애/사랑 에세이 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">명사/연예인 에세이 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">명언/잠언록 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">음식/요리 에세이 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">예술 에세이 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">한국 에세이 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">외국 에세이 <i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-content" id="economy">
+                                            <ul>
+                                                <li><a href="">경제/경영 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">경제 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">경영 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">마케팅/세일즈 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">재테크/투자 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">CEO/비즈니스 <i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-content" id="improvement">
+                                            <ul>
+                                                <li><a href="">자기계발 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">대화/협상 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">성공/처세 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">시간관리 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">자기능력계발 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">인간관계 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">취업 <i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-content" id="humanities">
+                                            <ul>
+                                                <li><a href="">인문 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">인문일반 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">심리 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">철학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">언어학/기호학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">종교학/신화학 <i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-content" id="history">
+                                            <ul>
+                                                <li><a href="">역사 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">역사학/이론/비평 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">세계사 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">서양사 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">동양사 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">한국사 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">주제별 역사/문화 <i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-content" id="society">
+                                            <ul>
+                                                <li><a href="">사회/정치 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">정치/외교 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">행정 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">국방/군사 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">법 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">사회학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">사회복지 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">언론/미디어 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">여성학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">교육학 <i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-content" id="natural">
+                                            <ul>
+                                                <li><a href="">자연/과학 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">공학일반/산업공학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">기계/전기/전자 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">농수산/축산 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">도시/토목/건설 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">물리학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">생물학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">수학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">천문/지구과학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">화학 <i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">과학 <i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-content" id="art">
+                                            <ul>
+                                                <li><a href="">예술/대중문화 전체보기<i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">예술일반/예술사<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">미술<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">음악<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">건축<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">만화/애니메이션<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">사진<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">연극/공연/영화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">TV/라디오<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-content" id="religion">
+                                            <ul>
+                                                <li><a href="">종교 전체보기<i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">개신교<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">천주교(가톨릭)<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">불교<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">종교일반<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">기타종교<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-content" id="child">
+                                            <ul>
+                                                <li><a href="">유아/어린이 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">유아놀이책<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">유아그림책<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">유아학습<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">어린이영어<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">어린이 문학<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">학습/학습만화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">어린이 교양<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">어린이 세트<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-content" id="home">
+                                            <ul>
+                                                <li><a href="">가정/요리 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">결혼/가족<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">임신/출산<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">자녀교육<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">인테리어/살림<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">요리<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">육아<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>  
+                                        <div class="menu-content" id="travel">
+                                            <ul>
+                                                <li><a href="">여행 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">국내여행<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">해외여행<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">테마여행<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">지도<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>  
+                                        <div class="menu-content" id="language">
+                                            <ul>
+                                                <li><a href="">언어 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">국어<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">영어<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">일본어<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">중국어<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">기타외국어<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">한자사전<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">기타 국가 사전<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">백과/전문사전<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>  
+                                        <div class="menu-content" id="it">
+                                            <ul>
+                                                <li><a href="">컴퓨터/IT 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">그래픽/멀티미디어<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">오피스활용도서<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">웹사이트<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">컴퓨터 입문/활용<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">게임<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">OS/데이터베이스<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">프로그래밍 언어<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">네트워크/보안<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">컴퓨터공학<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>  
+                                        <div class="menu-content" id="teenager">
+                                            <ul>
+                                                <li><a href="">청소년 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">학습법/진학 가이드<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">청소년 경제/자기계발<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">청소년 과학<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">청소년 문학<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">청소년 예술<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">청소년 인문/사회<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">논술/면접대비<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>  
+                                        <div class="menu-content" id="certificate">
+                                            <ul>
+                                                <li><a href="">수험서/자격증 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">취업/상식/적성검사<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">공무원<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">고등고시/전문직<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">검정고시<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">교원임용고시<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">경제/금융/회계/물류<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">공인중개/주택관리<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">국가자격/전문사무<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">편입/대학원<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">독학사<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">컴퓨터수험서<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">보건/위생/의학<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>  
+                                        <div class="menu-content" id="comics">
+                                            <ul>
+                                                <li><a href="">만화 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">공포/추리<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">교양만화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">드라마<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">성인만화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">명랑/코믹만화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">순정만화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">스포츠만화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">액션/무협만화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">웹툰/카툰에세이<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">학원만화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">일본어판 만화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">영문판 만화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">SF/판타지<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">기타만화<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>  
+                                        <div class="menu-content" id="magazine">
+                                            <ul>
+                                                <li><a href="">잡지 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">문예/교양지<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">자연/공학<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">컴퓨터/게임/그래픽<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">어학/고시/교육<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">연예/영화/만화<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">여행/취미/스포츠<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">외국잡지<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">여성/남성/패션<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">요리/건강<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">리빙/육아<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">경제/시사<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">종교<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">예술/사진/건축<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>  
+                                        <div class="menu-content" id="health">
+                                            <ul>
+                                                <li><a href="">건강/취미 전체보기 <i class="ic ic_carousel_arrow_right"></i></a></li>
+                                                <li><a href="">건강<i class="ic ic_arrow_right"></i></a></li>
+                                                <li><a href="">취미/레저<i class="ic ic_arrow_right"></i></a></li>
+                                            </ul>
+                                        </div>  
+
+                                        <div class="banner-box">
+                                            <a>
+                                                <img src="/image/main_menu_ad.png" alt="ad">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="main_category3">
+                                        <ul class="category3_list">
+                                            <li class="category3_list_item">
+                                                <a href="">
+                                                    <i class="ic category3-img pick"></i>
+                                                    <span> 바로픽업 </span>
+                                                </a>
+                                            </li>
+                                            <li class="category3_list_item">
+                                                <a href="">
+                                                    <i class="ic category3-img attendance"></i>
+                                                    <span> 출석체크 </span>
+                                                </a>
+                                            </li>
+                                            <li class="category3_list_item">
+                                                <a href="">
+                                                    <i class="ic category3-img event"></i>
+                                                    <span> 이벤트 </span>
+                                                </a>
+                                            </li>
+                                            <li class="category3_list_item">
+                                                <a href="">
+                                                    <i class="ic category3-img review"></i>
+                                                    <span> 베스트리뷰 </span>
+                                                </a>
+                                            </li>
+                                            <li class="category3_list_item">
+                                                <a href="">
+                                                    <i class="ic category3-img magazine"></i>
+                                                    <span> 매거진 </span>
+                                                </a>
+                                            </li>
+                                            <li class="category3_list_item">
+                                                <a href="">
+                                                    <i class="ic category3-img sale"></i>
+                                                    <span> 특가상품 </span>
+                                                </a>
+                                            </li>
+                                            <li class="category3_list_item">
+                                                <a href="">
+                                                    <i class="ic category3-img store"></i>
+                                                    <span> 매장위치 </span>
+                                                </a>
+                                            </li>
+                                            <li class="category3_list_item">
+                                                <a href="">
+                                                    <i class="ic category3-img custom"></i>
+                                                    <span> 고객센터 </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="nav-left">
+                            <li> <a href="" class="nav_item"> 국내도서 </a> </li>
+                            <li> <a href="" class="nav_item"> 베스트 </a> </li>
+                            <li> <a href="" class="nav_item"> 신상품 </a> </li>
+                            <li> <a href="" class="nav_item"> 매거진 </a> </li>
+                        </ul>
+
+                        <ul class="nav-right">
+                            <li> <a href="" class="nav_item"> 이벤트 </a> </li>
+                            <li> <a href="" class="nav_item"> 출석체크 </a> </li>
+                            <li> <a href="" class="nav_item"> 베스트리뷰 </a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="myPage_inner inner">
+                <div class="myPage_left" style="margin-top: 0;">
+                    <a href="" class="myPage_profile">
+                        <div class="member_profile_photo_area">
+                            <div class="member_profile_photo"></div>
+                            <i class="ic ic_member_profile_pencil">
+                                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M30.1896 9.74448L24.2556 3.80909C24.0582 3.61172 23.8239 3.45515 23.5661 3.34833C23.3082 3.2415 23.0319 3.18652 22.7528 3.18652C22.4737 3.18652 22.1973 3.2415 21.9395 3.34833C21.6816 3.45515 21.4473 3.61172 21.25 3.80909L4.8729 20.1875C4.67472 20.3841 4.51759 20.6182 4.41066 20.8761C4.30373 21.1339 4.24912 21.4105 4.25001 21.6896V27.625C4.25001 28.1886 4.47389 28.7291 4.87241 29.1276C5.27092 29.5261 5.81143 29.75 6.37501 29.75H12.3104C12.5896 29.7509 12.8661 29.6963 13.124 29.5894C13.3819 29.4824 13.6159 29.3253 13.8125 29.1271L30.1896 12.75C30.387 12.5527 30.5436 12.3184 30.6504 12.0606C30.7572 11.8027 30.8122 11.5264 30.8122 11.2473C30.8122 10.9682 30.7572 10.6918 30.6504 10.4339C30.5436 10.1761 30.387 9.94181 30.1896 9.74448ZM6.81462 21.25L18.0625 10.0021L20.2792 12.2188L9.03126 23.4653L6.81462 21.25ZM6.37501 23.8146L10.1854 27.625H6.37501V23.8146ZM12.75 27.1854L10.5334 24.9688L21.7813 13.7209L23.9979 15.9375L12.75 27.1854ZM25.5 14.4354L19.5646 8.50003L22.7521 5.31253L28.6875 11.2466L25.5 14.4354Z" fill="white"/>
+                                </svg>
+                            </i>
+                        </div>
+                        <div class="member_name">
+                            <span><span id="memberName">홍길동</span>님</span> <span id="memberGrade">새싹</span>
+                        </div>
+                        <div class="member_email"> <span>(example@example.com)</span></div>
+                    </a>
+
+                    <div class="myPage_menu">
+                        <div class="myPage_menu_item">
+                            <p class="menu_item_title"><a href="">쇼핑 내역<i class="ic ic_arrow_right"></i></a></p>
+                            <p class="menu_item_content"><a href="">주문/배송목록</a></p>
+                            <p class="menu_item_content"><a href="">선물함</a></p>
+                            <p class="menu_item_content"><a href="">매장 구매 내역</a></p>
+                            <p class="menu_item_content"><a href="">영수증</a></p>
+                        </div>
+                        <div class="myPage_menu_item">
+                            <p class="menu_item_title"><a href="">나의 통장<i class="ic ic_arrow_right"></i></a></p>
+                            <p class="menu_item_content"><a href="">통합 포인트</a></p>
+                            <p class="menu_item_content"><a href="">쿠폰</a></p>
+                            <p class="menu_item_content"><a href="">기프트카드</a></p>
+                        </div>
+                        <div class="myPage_menu_item">
+                            <p class="menu_item_title"><a href="">회원정보<i class="ic ic_arrow_right"></i></a></p>
+                            <p class="menu_item_content"><a href="">배송주소록</a></p>
+                            <p class="menu_item_content"><a href="">회원정보관리</a></p>
+                            <p class="menu_item_content"><a href="">나의 회원등급</a></p>
+                        </div>
+                        <div class="myPage_menu_item">
+                            <p class="menu_item_title"><a href="">고객센터<i class="ic ic_arrow_right"></i></a></p>
+                            <p class="menu_item_content"><a href="">1:1 문의 내역</a></p>
+                            <p class="menu_item_content"><a href="">업체배송 문의내역</a></p>
+                        </div>
+                        <div class="myPage_menu_item item_last">
+                            <p class="menu_item_title"><a href="">도움이 필요하세요?</a></p>
+                            <p class="menu_item_content"><a href="">FAQ</a></p>
+                            <p class="menu_item_content"><a href="">1:1 고객 상담</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="myPage_right">
+                    <div class="my_orders_container">
+                        <h1 class="my_orders_title">주문/배송 목록</h1>
+
+                        <div class="my_orders_nav">
+                            <ul class="my_orders_nav_list">
+                                <li class="my_orders_nav_item"> <strong>주문내역</strong></li>
+                                <li class="my_orders_nav_item"> <strong>0</strong> <span>준비중</span> </li>
+                                <li class="my_orders_nav_item"> <strong>0</strong> <span>배송중</span> </li>
+                                <li class="my_orders_nav_item"> <strong>0</strong> <span>배송완료</span> </li>
+                                <li class="my_orders_nav_item"> <strong>0</strong> <span>취소</span> </li>
+                                <li class="my_orders_nav_item"> <strong>0</strong> <span>교환/반품/환불</span> </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="my_orders_box">
+                        <!--
+                            주문 내역이 없으면 -> my_orders_box_wrap : display:none, my_orders_box_none : display:none
+                            주문 내역이 있으면 -> my_orders_box_wrap : display:block, my_orders_box_none : display:none
+                        -->
+                            <div class="my_orders_box_none" style="display: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 16 16">
+                                    <circle cx="8" cy="8" r="8" fill="#c6c6c6"></circle>
+                                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" fill="white"></path>
+                                </svg>
+                                <strong> 주문 내역이 없습니다. </strong>
+                                <a href="/">계속 쇼핑하기</a>
+                            </div>
+
+                            <div class="my_orders_box_wrap"> <!-- 주문내역 전체 내역 -->
+                                <div class="my_orders_table"> <!-- 주문내역 반복 아이템 -->
+                                    <div class="orders_table_header">
+                                        <strong>2024.12.27(O24103953903)</strong>
+                                        <a href="" class="underline">상세보기<i class="ic ic_arrow_right"></i></a>
+                                    </div>
+
+                                    <div class="orders_table_content"> <!-- 책 1권의 정보 -->
+                                        <div class="order_book_info_box flex">
+                                            <div class="order_book_img">
+                                                <a href=""> <!-- 책 상세 페이지 이동 -->
+                                                    <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788988474914.jpg" alt="book">
+                                                </a>
+                                            </div>
+                                            <div class="order_book_info flex">
+                                                <a href=""><strong class="underline">[국내도서] SQL 자격검정 실전문제 격검정 격검정 격검정 격검정격검정격검정 격검정격검정</strong></a> <!-- 책 상세 페이지 이동 -->
+                                                <span>수량 : 1</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="order_book_price">
+                                            <span><strong>18,000</strong>원</span>
+                                        </div>
+
+                                        <div class="order_book_status">
+                                            <strong>배송완료</strong>
+                                        </div>
+
+                                        <div class="order_book_review_btn">
+                                            <button type="button" class="review_btn btn">리뷰 작성</button>
+                                        </div>
+                                    </div>
+                                    <div class="orders_table_content"> <!-- 책 1권의 정보 -->
+                                        <div class="order_book_info_box flex">
+                                            <div class="order_book_img">
+                                                <a href=""> <!-- 책 상세 페이지 이동 -->
+                                                    <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788988474914.jpg" alt="book">
+                                                </a>
+                                            </div>
+                                            <div class="order_book_info flex">
+                                                <a href=""><strong class="underline">[국내도서] SQL 자격검정 실전문제 격검정 격검정 격검정 격검정격검정격검정 격검정격검정</strong></a> <!-- 책 상세 페이지 이동 -->
+                                                <span>수량 : 1</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="order_book_price">
+                                            <span><strong>18,000</strong>원</span>
+                                        </div>
+
+                                        <div class="order_book_status">
+                                            <strong>배송완료</strong>
+                                        </div>
+
+                                        <div class="order_book_review_btn">
+                                            <button type="button" class="review_btn btn">리뷰 작성</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my_orders_table"> <!-- 주문내역 반복 아이템 -->
+                                    <div class="orders_table_header">
+                                        <strong>2024.12.27(O24103953903)</strong>
+                                        <a href="" class="underline">상세보기<i class="ic ic_arrow_right"></i></a>
+                                    </div>
+
+                                    <div class="orders_table_content"> <!-- 책 1권의 정보 -->
+                                        <div class="order_book_info_box flex">
+                                            <div class="order_book_img">
+                                                <a href=""> <!-- 책 상세 페이지 이동 -->
+                                                    <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788988474914.jpg" alt="book">
+                                                </a>
+                                            </div>
+                                            <div class="order_book_info flex">
+                                                <a href=""><strong class="underline">[국내도서] SQL 자격검정 실전문제 격검정 격검정 격검정 격검정격검정격검정 격검정격검정</strong></a> <!-- 책 상세 페이지 이동 -->
+                                                <span>수량 : 1</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="order_book_price">
+                                            <span><strong>18,000</strong>원</span>
+                                        </div>
+
+                                        <div class="order_book_status">
+                                            <strong>배송완료</strong>
+                                        </div>
+
+                                        <div class="order_book_review_btn">
+                                            <button type="button" class="review_btn btn">리뷰 작성</button>
+                                        </div>
+                                    </div>
+                                    <div class="orders_table_content"> <!-- 책 1권의 정보 -->
+                                        <div class="order_book_info_box flex">
+                                            <div class="order_book_img">
+                                                <a href=""> <!-- 책 상세 페이지 이동 -->
+                                                    <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788988474914.jpg" alt="book">
+                                                </a>
+                                            </div>
+                                            <div class="order_book_info flex">
+                                                <a href=""><strong class="underline">[국내도서] SQL 자격검정 실전문제 격검정 격검정 격검정 격검정격검정격검정 격검정격검정</strong></a> <!-- 책 상세 페이지 이동 -->
+                                                <span>수량 : 1</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="order_book_price">
+                                            <span><strong>18,000</strong>원</span>
+                                        </div>
+
+                                        <div class="order_book_status">
+                                            <strong>배송완료</strong>
+                                        </div>
+
+                                        <div class="order_book_review_btn">
+                                            <button type="button" class="btn">리뷰 작성</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pagenation_area">
+                                    <div class="pagenation">
+                                        <a href=""><i class="ic ic_carousel_left_white"></i></a>
+                                        <!-- <th:block th:each="i:${#numbers.sequence(ph.startPage, ph.endPage)}"> -->
+                                        <ul class="pagenation_num">
+                                            <!-- 현재 페이지에 class="present" 추가-->
+                                            <li class="present"><a href="">1</a></li>
+                                            <li><a href="">2</a></li>
+                                            <li><a href="">3</a></li>
+                                            <li><a href="">4</a></li>
+                                            <li><a href="">5</a></li>
+                                            <li><a href="">6</a></li>
+                                            <li><a href="">7</a></li>
+                                            <li><a href="">8</a></li>
+                                            <li><a href="">9</a></li>
+                                            <li><a href="">10</a></li>
+                                        </ul>
+                                        <!-- </th:block> -->
+                                        <a href=""><i class="ic ic_carousel_right_white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal_overlay">
+                <div class="modal_wirte_review">
+                    <h2 class="modal_title"> 리뷰 작성
+                        <svg id="closeModal" xmlns="http://www.w3.org/2000/svg" width="23" height="23" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" fill="none" stroke="currentColor" stroke-width="1"/>
+                        </svg>
+                    </h2>
+
+                    <div class="modal_contents">
+                        <form action="">
+                            <div class="modal_content">
+                                <div class="order_book_info_box flex">
+                                    <div class="order_book_img">
+                                        <a href=""> <!-- 책 상세 페이지 이동 -->
+                                            <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788988474914.jpg" alt="book">
+                                        </a>
+                                    </div>
+                                    <div class="order_book_info flex">
+                                        <a href=""><strong>[국내도서] SQL 자격검정 실전문제 격검정 격검정 격검정 격검정격검정격검정 격검정격검정</strong></a> <!-- 책 상세 페이지 이동 -->
+                                        <span>수량 : 1</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal_content">
+                                <p class="modal_content_title">받는 분</p>
+                                <div class="input_box">
+                                    <input type="text" placeholder="이름을 입력해 주세요." maxlength="7">
+                                </div>
+                                <div class="input_box number">
+                                    <input type="text" placeholder="휴대폰 번호를 - 없이 입력해 주세요." maxlength="11">
+                                </div>
+                            </div>
+
+                            <div class="modal_content">
+                                <p class="modal_content_title">주소</p>
+                                <div class="address">
+                                    <div class="form_addr1">
+                                        <div class="input_box addressform" style="width: 70%;">
+                                            <input type="text" class="postcode address" id="postcode" readonly>
+                                        </div>
+                                        <button type="button" onclick="execDaumPostcode()" class="addrBtn" id="non_member_addrBtn">주소 찾기</button>
+                                    </div>
+                                    <div class="form_addr2">
+                                        <div class="input_box addr1">
+                                            <input type="text" class="homeAddress addressform" id="homeAddress" readonly>
+                                        </div>
+                                        <div class="input_box addr2">
+                                            <input type="text" class="detailAddress addressform" id="detailAddress" placeholder="상세 주소를 입력해 주세요.">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="defalut_address_check">
+                                    <i class="ic ic_checkbox_off"></i>
+                                    <input type="checkbox" class="check_box">
+                                    <span>기본 배송지 등록</span>
+                                </p>
+                            </div>
+
+                            <div class="modal_content">
+                                <button type="submit" class="btn registration_btn">등록</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="inner">
+                <div class="content">
+                  <div class="footer_ic_box">
+                    <a href=""> <i class="ic ic_logo"></i> </a>
+                    <ul>
+                      <li> <i class="ic ic_blog"></i> </li>
+                      <li> <i class="ic ic_instagram"></i> </li>
+                      <li> <i class="ic ic_youtube"></i> </li>
+                    </ul>
+                  </div>
+                  <div class="footer_center">
+                    <div class="footer_center_left">
+                      <address class="footer_info_box">
+                        <div class="footer_info_top">
+                          <span class="info_text">대표이사 차민주</span>
+                          <span class="info_text">인천광역시 남동구 인주대로 593</span>
+                          <strong class="info_text">대표전화 032-719-4074</strong>
+                        </div>
+                        <div class="footer_info_bottom">
+                          <span class="info_text">사업자등록번호 144-56-5160823</span>
+                          <span class="info_text">통신판매등록번호 2024-인천구월-12031호</span>
+                        </div>
+                      </address>
+                    </div>
+                    <div class="footer_center_right">
+                      <div class="info"> <a href="" class="info_text">이용안내 <i class="ic ic_arrow_right"></i></a> </div>
+                      <div class="info"> <a href="" class="info_text">찾아오시는 길 <i class="ic ic_arrow_right"></i></a> </div>
+                    </div>
+                  </div>
+                  <div class="footer_menu">
+                    <ul class="footer_menu_list">
+                      <li class="footer_menu_item"><a href="">회사소개</a></li>
+                      <li class="footer_menu_item"><a href="">채용안내</a></li>
+                      <li class="footer_menu_item"><a href=""><strong>개인정보처리방침</strong></a></li>
+                      <li class="footer_menu_item"><a href="">청소년보호정책</a></li>
+                      <li class="footer_menu_item"><a href="">광고안내</a></li>
+                    </ul>
+                    <div class="footer_copyWriter">
+                      <span>Copyright ⓒ EZEN-FINAL-PROJECT-1.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </footer>
+    </div>
+    
+    <script src="/js/header.js"></script>
+    <script src="/js/my_orders.js"></script>
+</body>
+</html>
