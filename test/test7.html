@@ -6,10 +6,10 @@
     <title>Document</title>
     <style>
         .star {
-  cursor: pointer;
-  margin-right: 10px;
-  transition: fill 0.3s ease;
-}
+          cursor: pointer;
+          margin-right: 10px;
+          transition: fill 0.3s ease;
+        }
 
 .rating-container {
   margin-top: 10px;
@@ -71,112 +71,124 @@
       </div>
       
       <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const stars = document.querySelectorAll('.star');
-  const ratingValue = document.querySelector('.rating-value');
-  const rateStars = document.querySelector('.rate_stars'); // 별점 영역
-  let currentHoverIndex = -1; // 현재 호버 중인 별의 인덱스
-  let isHalfHover = false; // 현재 반쪽 여부
-  let selectedRating = 0; // 선택된 별점 값
+        document.addEventListener('DOMContentLoaded', () => {
+          const stars = document.querySelectorAll('.star');
+          const ratingValue = document.querySelector('.rating-value');
+          const rateStars = document.querySelector('.rate_stars'); // 별점 영역
+          let currentHoverIndex = -1; // 현재 호버 중인 별의 인덱스
+          let isHalfHover = false; // 현재 반쪽 여부
+          let selectedRating = 0; // 선택된 별점 값
+        
+          stars.forEach((star, index) => {
+            // 별점 호버 이벤트
+            star.addEventListener('mousemove', (e) => {
+              const rect = star.getBoundingClientRect();
+              const offsetX = e.clientX - rect.left;
+              const isHalf = offsetX < rect.width / 2; // 반쪽 여부 확인
+        
+              // 중복 호출 방지
+              if (currentHoverIndex === index && isHalfHover === isHalf) return;
+        
+              currentHoverIndex = index; // 현재 호버 중인 별 업데이트
+              isHalfHover = isHalf; // 현재 반쪽 여부 업데이트
+        
+              // 모든 별 초기화
+              stars.forEach((s, i) => {
+                const gradientId = `starGradient${i + 1}`; // 각 별의 고유 ID
+                const gradient = document.querySelector(`#${gradientId} stop:nth-child(2)`); // 회색 부분
+                const firstStop = document.querySelector(`#${gradientId} stop:nth-child(1)`); // 노란 부분
+        
+                if (i < index) {
+                  firstStop.setAttribute('offset', '100%'); // 이전 별은 전체 노란색
+                  gradient.setAttribute('offset', '100%');
+                } else if (i === index && isHalf) {
+                  firstStop.setAttribute('offset', '50%'); // 현재 별은 반쪽 노란색
+                  gradient.setAttribute('offset', '50%');
+                } else if (i === index && !isHalf) {
+                  firstStop.setAttribute('offset', '100%'); // 현재 별은 전체 노란색
+                  gradient.setAttribute('offset', '100%');
+                } else {
+                  firstStop.setAttribute('offset', '0%'); // 나머지는 회색
+                  gradient.setAttribute('offset', '0%');
+                }
+              });
+        
+              // 현재 별점 표시
+              const hoverRating = isHalf ? index + 0.5 : index + 1;
+              ratingValue.textContent = `${hoverRating}점`;
+            });
+        
+            // 별점 클릭 이벤트
+            star.addEventListener('click', (e) => {
+              const rect = star.getBoundingClientRect();
+              const offsetX = e.clientX - rect.left;
+              const isHalf = offsetX < rect.width / 2;
+              const clickedRating = isHalf ? index + 0.5 : index + 1;
 
-  stars.forEach((star, index) => {
-    // 별점 호버 이벤트
-    star.addEventListener('mousemove', (e) => {
-      const rect = star.getBoundingClientRect();
-      const offsetX = e.clientX - rect.left;
-      const isHalf = offsetX < rect.width / 2; // 반쪽 여부 확인
+              // 같은 점수를 클릭하면 0점으로 초기화
+              if (selectedRating === clickedRating) {
+                selectedRating = 0;
+                updateStars(-1, false);
+                ratingValue.textContent = '0점';
+              } else {
+                // 선택된 별점 값 저장
+                selectedRating = clickedRating;
+                ratingValue.textContent = `${selectedRating}점`;
 
-      // 중복 호출 방지
-      if (currentHoverIndex === index && isHalfHover === isHalf) return;
-
-      currentHoverIndex = index; // 현재 호버 중인 별 업데이트
-      isHalfHover = isHalf; // 현재 반쪽 여부 업데이트
-
-      // 모든 별 초기화
-      stars.forEach((s, i) => {
-        const gradientId = `starGradient${i + 1}`; // 각 별의 고유 ID
-        const gradient = document.querySelector(`#${gradientId} stop:nth-child(2)`); // 회색 부분
-        const firstStop = document.querySelector(`#${gradientId} stop:nth-child(1)`); // 노란 부분
-
-        if (i < index) {
-          firstStop.setAttribute('offset', '100%'); // 이전 별은 전체 노란색
-          gradient.setAttribute('offset', '100%');
-        } else if (i === index && isHalf) {
-          firstStop.setAttribute('offset', '50%'); // 현재 별은 반쪽 노란색
-          gradient.setAttribute('offset', '50%');
-        } else if (i === index && !isHalf) {
-          firstStop.setAttribute('offset', '100%'); // 현재 별은 전체 노란색
-          gradient.setAttribute('offset', '100%');
-        } else {
-          firstStop.setAttribute('offset', '0%'); // 나머지는 회색
-          gradient.setAttribute('offset', '0%');
-        }
-      });
-
-      // 현재 별점 표시
-      const hoverRating = isHalf ? index + 0.5 : index + 1;
-      ratingValue.textContent = `${hoverRating}점`;
-    });
-
-    // 별점 클릭 이벤트
-    star.addEventListener('click', (e) => {
-      const rect = star.getBoundingClientRect();
-      const offsetX = e.clientX - rect.left;
-      const isHalf = offsetX < rect.width / 2;
-
-      // 선택된 별점 값 저장
-      selectedRating = isHalf ? index + 0.5 : index + 1;
-      ratingValue.textContent = `${selectedRating}점`;
-    });
-
-    // 별점에서 마우스를 뺐을 때 초기화
-    star.addEventListener('mouseleave', () => {
-      if (selectedRating === 0) {
-        // 별점 선택이 없을 때만 초기화
-        stars.forEach((s, i) => {
-          const gradientId = `starGradient${i + 1}`;
-          const gradient = document.querySelector(`#${gradientId} stop:nth-child(2)`);
-          const firstStop = document.querySelector(`#${gradientId} stop:nth-child(1)`);
-
-          // 모든 별을 회색으로
-          firstStop.setAttribute('offset', '0%');
-          gradient.setAttribute('offset', '0%');
+                // 별점 확정
+                updateStars(index, isHalf);
+              }
+            });
+        
+            // 별점에서 마우스를 뺐을 때 초기화
+            star.addEventListener('mouseleave', () => {
+              if (selectedRating === 0) {
+                // 별점 선택이 없을 때만 초기화
+                stars.forEach((s, i) => {
+                  const gradientId = `starGradient${i + 1}`;
+                  const gradient = document.querySelector(`#${gradientId} stop:nth-child(2)`);
+                  const firstStop = document.querySelector(`#${gradientId} stop:nth-child(1)`);
+        
+                  // 모든 별을 회색으로
+                  firstStop.setAttribute('offset', '0%');
+                  gradient.setAttribute('offset', '0%');
+                });
+        
+                ratingValue.textContent = '0점'; // 점수 초기화
+              }
+        
+              currentHoverIndex = -1; // 호버 상태 초기화
+              isHalfHover = false; // 반쪽 여부 초기화
+            });
+          });
+        
+          // `rate_stars` 영역 밖으로 나갔을 때 초기화
+          document.addEventListener('mousemove', (e) => {
+            const rect = rateStars.getBoundingClientRect(); // 별점 영역
+            const isOutside =
+              e.clientX < rect.left ||
+              e.clientX > rect.right ||
+              e.clientY < rect.top ||
+              e.clientY > rect.bottom;
+        
+            if (isOutside && selectedRating === 0 && !rateStars.contains(e.target)) {
+              stars.forEach((s, i) => {
+                const gradientId = `starGradient${i + 1}`;
+                const gradient = document.querySelector(`#${gradientId} stop:nth-child(2)`);
+                const firstStop = document.querySelector(`#${gradientId} stop:nth-child(1)`);
+        
+                // 모든 별을 회색으로
+                firstStop.setAttribute('offset', '0%');
+                gradient.setAttribute('offset', '0%');
+              });
+        
+              ratingValue.textContent = '0점'; // 점수 초기화
+              currentHoverIndex = -1; // 상태 초기화
+              isHalfHover = false;
+            }
+          });
         });
-
-        ratingValue.textContent = '0점'; // 점수 초기화
-      }
-
-      currentHoverIndex = -1; // 호버 상태 초기화
-      isHalfHover = false; // 반쪽 여부 초기화
-    });
-  });
-
-  // `rate_stars` 영역 밖으로 나갔을 때 초기화
-  document.addEventListener('mousemove', (e) => {
-    const rect = rateStars.getBoundingClientRect(); // 별점 영역
-    const isOutside =
-      e.clientX < rect.left ||
-      e.clientX > rect.right ||
-      e.clientY < rect.top ||
-      e.clientY > rect.bottom;
-
-    if (isOutside && selectedRating === 0) {
-      stars.forEach((s, i) => {
-        const gradientId = `starGradient${i + 1}`;
-        const gradient = document.querySelector(`#${gradientId} stop:nth-child(2)`);
-        const firstStop = document.querySelector(`#${gradientId} stop:nth-child(1)`);
-
-        // 모든 별을 회색으로
-        firstStop.setAttribute('offset', '0%');
-        gradient.setAttribute('offset', '0%');
-      });
-
-      ratingValue.textContent = '0점'; // 점수 초기화
-      currentHoverIndex = -1; // 상태 초기화
-      isHalfHover = false;
-    }
-  });
-});
+        
 
 
 

@@ -5,11 +5,12 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/main.css"/>
 </head>
 <body>
     <div class="container">
-        <header>
+        <header id="main-header" class="default-header">
             <div class="header_above">
                 <div class="inner">
                     <div class="header_top_left">
@@ -29,22 +30,24 @@
             <div class="header_center">
                 <div class="inner">
                     <div class="header_logo">
-                        <a href="/" class="ic ic_logo"> <img src="/image/logo.png" alt="logo"></a>
+                        <a href="/" class="ic ic_logo"></a>
                     </div>
 
                     <div class="header_search_wrap" tabindex="0">
                         <form action="post" class="header_search">
                             <div class="search_dropBox_wrap">
-                                <select name="search_type" id="searchType">
-                                    <option value="" selected> 통합검색 </option>
-                                    <option value=""> 책제목 </option>
-                                    <option value=""> 작가명 </option>
-                                    <option value=""> 출판사 </option>
+                                <select name="search_type" id="searchType" name="type">
+                                    <option value="tap" th:selected="${ph.pgvo.type eq 'tap'? true : false }" selected> 통합검색 </option>
+                                    <option value="t" th:selected="${ph.pgvo.type eq 't'? true : false }"> 책제목 </option>
+                                    <option value="a" th:selected="${ph.pgvo.type eq 'a'? true : false }"> 작가명 </option>
+                                    <option value="p" th:selected="${ph.pgvo.type eq 'p'? true : false }"> 출판사 </option>
                                  </select>
                             </div>
+                            <input type="hidden" name="pageNo" th:value="1">
+                            <input type="hidden" name="qty" th:value="${ph.pgvo.qty }">
 
                              <div class="search_input_wrap">
-                                <input type="search" class="search_keyword" placeholder="검색어를 입력해 주세요.">
+                                <input type="search" name="keyword" th:value="${ph.pgvo.keyword}" class="search_keyword" placeholder="검색어를 입력해 주세요.">
                             </div>
 
                             <div class="search_btn_wrap">
@@ -56,11 +59,18 @@
                     </div>
 
                     <div class="header_user_wrap">
-                        <ul class="user_menu_list">
-                            <li class="user_menu_item"> <i class="ic ic_cart"></i></li>
-                            <li class="user_menu_item"> <i class="ic ic_bell"></i> </li>
-                            <li class="user_menu_item"> <i class="ic ic_myPage"></i> </li>
-                        </ul>
+                        <div class="user_menu_list">
+                            <a href="" class="user_menu_item">
+                                <i class="ic ic_cart"></i>
+                                <span class="cart_item_count">1</span>
+                            </a>
+                            <a href="" class="user_menu_item">
+                                <i class="ic ic_bell"></i> 
+                            </a>
+                            <a href="" class="user_menu_item">
+                                <i class="ic ic_myPage"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -460,37 +470,22 @@
 
         <!-- 여기서부터 main -->
          <main>
-            <div class="main_slider">
-                <ul class="main_slides">
-                  <li class="main_slide active" data-bgcolor="#DCE1E7">
-                    <img src="/image/main/0.png" alt="한강">
-                  </li>
-                  <li class="main_slide" data-bgcolor="#D73938">
-                    <img src="/image/main/1.png" alt="빨강">
-                  </li>
-                  <li class="main_slide" data-bgcolor="#F26F13">
-                    <img src="/image/main/2.png" alt="주황">
-                  </li>
-                  <li class="main_slide" data-bgcolor="#FDEC78">
-                    <img src="/image/main/3.png" alt="노랑">
-                  </li>
-                  <li class="main_slide" data-bgcolor="#005BB7">
-                    <img src="/image/main/4.png" alt="파랑">
-                  </li>
-                  <li class="main_slide" data-bgcolor="#005BB7">
-                    <img src="/image/main/5.png" alt="보라">
-                  </li>
-                </ul>
-                <button class="btn slidePrevBtn">
-                  <img src="/image/svg/main_silde_prev.svg" alt="prevBtn" width="100%" height="100%">
-                </button>
-                <button class="btn slideNextBtn">
-                  <img src="/image/svg/main_silde_next.svg" alt="NextBtn" width="100%" height="100%">
-                </button>
-              </div>
+            
 
-              <div class="chat-bot">
-                <button>
+            <div class="chat-bot">
+                <div id="chatBox" class="chat-box">
+                    <div class="chat-header">
+                        <span>이젠문고 챗봇</span>
+                        <button id="closeChat" class="close-chat">닫기</button>
+                    </div>
+                    <div class="chat-content">
+                        <!-- 채팅 내용이 여기에 표시됩니다 -->
+                    </div>
+                    <input type="text" id="userMessage" placeholder="메시지를 입력하세요...">
+                    <button id="sendButton" data-classify="a-type">전송</button>
+                </div>
+
+                <button type="button" id="chatBtn">
                     <svg class="owl" width="115" height="124" viewBox="0 0 115 124" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_425_209)">
                         <path d="M46.3274 115.637L45.0531 114.408L46.5094 100.119C46.8735 96.7057 46.3729 93.8841 45.3717 93.8386H45.3262C44.3705 93.7476 43.2783 96.4781 42.9597 99.8458L41.458 114.591L40.4113 115.182C37.0436 117.139 34.7682 119.232 35.3143 119.915L35.3598 119.961C35.8604 120.552 38.2724 119.824 41.0939 118.368C40.9574 121.189 41.458 123.328 42.3226 123.374H42.3681C43.2328 123.419 44.1885 121.28 44.598 118.413C46.9645 120.461 49.2399 121.735 49.877 121.235L49.9225 121.189C50.6507 120.734 49.0579 118.231 46.3274 115.637Z" fill="#FF931E"/>
@@ -500,7 +495,7 @@
                         <path d="M55.8839 65.168C74.861 65.168 90.2428 80.1403 90.2428 98.6622C90.2428 98.7988 90.2428 98.9808 90.2428 99.1173C83.5531 105.033 73.3137 108.765 57.8863 108.629C39.5009 108.492 28.3513 103.122 21.707 95.1581C23.5274 78.3199 38.1356 65.168 55.8839 65.168Z" fill="#497248"/>
                         <path class="right-eye" d="M79.5936 52.7897C88.4155 52.7897 95.5671 45.6382 95.5671 36.8163C95.5671 27.9943 88.4155 20.8428 79.5936 20.8428C70.7717 20.8428 63.6201 27.9943 63.6201 36.8163C63.6201 45.6382 70.7717 52.7897 79.5936 52.7897Z" fill="white"/>
                         <path class="left-eye" d="M33.494 52.7897C42.3159 52.7897 49.4675 45.6382 49.4675 36.8163C49.4675 27.9943 42.3159 20.8428 33.494 20.8428C24.6721 20.8428 17.5205 27.9943 17.5205 36.8163C17.5205 45.6382 24.6721 52.7897 33.494 52.7897Z" fill="white"/>
-                       <!-- 눈동자 추가 -->
+                        <!-- 눈동자 추가 -->
                         <circle class="left-pupil" cx="33.494" cy="36.8163" r="4.5" fill="#2d2d2d"></circle>
                         <circle class="right-pupil" cx="79.5936" cy="36.8163" r="4.5" fill="#2d2d2d"></circle>
                        
@@ -519,13 +514,61 @@
                         </clipPath>
                         </defs>
                     </svg>
-                </button>
-                                      
+                </button>            
+            </div>
+        </main>
+
+        <footer>
+            <div class="inner">
+                <div class="content">
+                  <div class="footer_ic_box">
+                    <a href=""> <i class="ic ic_logo"></i> </a>
+                    <ul>
+                      <li> <i class="ic ic_blog"></i> </li>
+                      <li> <i class="ic ic_instagram"></i> </li>
+                      <li> <i class="ic ic_youtube"></i> </li>
+                    </ul>
+                  </div>
+                  <div class="footer_center">
+                    <div class="footer_center_left">
+                      <address class="footer_info_box">
+                        <div class="footer_info_top">
+                          <span class="info_text">대표이사 차민주</span>
+                          <span class="info_text">인천광역시 남동구 인주대로 593</span>
+                          <strong class="info_text">대표전화 032-719-4074</strong>
+                        </div>
+                        <div class="footer_info_bottom">
+                          <span class="info_text">사업자등록번호 144-56-5160823</span>
+                          <span class="info_text">통신판매등록번호 2024-인천구월-12031호</span>
+                        </div>
+                      </address>
+                    </div>
+                    <div class="footer_center_right">
+                      <div class="info"> <a href="" class="info_text">이용안내 <i class="ic ic_arrow_right"></i></a> </div>
+                      <div class="info"> <a href="" class="info_text">찾아오시는 길 <i class="ic ic_arrow_right"></i></a> </div>
+                    </div>
+                  </div>
+                  <div class="footer_menu">
+                    <ul class="footer_menu_list">
+                      <li class="footer_menu_item"><a href="">회사소개</a></li>
+                      <li class="footer_menu_item"><a href="">채용안내</a></li>
+                      <li class="footer_menu_item"><a href=""><strong>개인정보처리방침</strong></a></li>
+                      <li class="footer_menu_item"><a href="">청소년보호정책</a></li>
+                      <li class="footer_menu_item"><a href="">광고안내</a></li>
+                    </ul>
+                    <div class="footer_copyWriter">
+                      <span>Copyright ⓒ EZEN-FINAL-PROJECT-1.</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-         </main>
+        </footer>
     </div>
     
     <script src="/js/header.js"> </script>
     <script src="/js/main.js"> </script>
+    <script src="https://cdn.jsdelivr.net/gh/happy358/TornPaper@v0.0.3/tornpaper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>new Tornpaper();</script>
 </body>
 </html>

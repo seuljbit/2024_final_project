@@ -145,20 +145,22 @@ header .inner {
 .user_menu_list {
     display: flex;
     flex-direction: row;
-    gap: 1.1rem;
+    gap: 12px;
 }
 .user_menu_list .ic {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
+    background-size: cover;
+    background-position: center;
 }
 .ic_cart {
-    background-image: url("/image/svg/cart.svg");
+    background-image: url("../image/svg/cart.svg");
 }
 .ic_bell {
-    background-image: url("/image/svg/bell.svg");
+    background-image: url("../image/svg/bell.svg");
 }
 .ic_myPage {
-    background-image: url("/image/svg/person.svg");
+    background-image: url("../image/svg/person.svg");
 }
 
 
@@ -196,11 +198,11 @@ header .inner {
 }
 
 .ic_menu {
-    background-image: url("/image/svg/menu.svg");
+    background-image: url("../image/svg/menu.svg");
 }
 
 .ic_menu_close {
-    background-image: url("/image/svg/menu_close.svg");
+    background-image: url("../image/svg/menu_close.svg");
 }
 
 
@@ -240,7 +242,7 @@ header .inner {
     max-height: 700px;
     z-index: 100;
     margin-top: 5px;
-    
+
     justify-content: center;
     align-items: center;
 
@@ -280,10 +282,10 @@ header .inner {
     cursor: pointer;
 }
 .ic_prev {
-    background-image: url("/image/svg/prev.svg");
+    background-image: url("../image/svg/prev.svg");
 }
 .ic_next {
-    background-image: url("/image/svg/next.svg");
+    background-image: url("../image/svg/next.svg");
 }
 .category1_slide {
     display: flex;
@@ -392,7 +394,7 @@ header .inner {
     font-size: 24px;
 }
 .menu-content .ic_carousel_arrow_right {
-    background-image: url("/image/svg/arrow-right-custom.svg");
+    background-image: url("../image/svg/arrow-right-custom.svg");
     width: 25px;
     height: 25px;
     margin-left: 10px;
@@ -453,28 +455,28 @@ header .ic_arrow_right {
 }
 
 .pick {
-    background-image: url("/image/svg/menu_1.svg");
+    background-image: url("../image/svg/menu_1.svg");
 }
 .attendance {
-    background-image: url("/image/svg/menu_2.svg");
+    background-image: url("../image/svg/menu_2.svg");
 }
 .event {
-    background-image: url("/image/svg/menu_3.svg");
+    background-image: url("../image/svg/menu_3.svg");
 }
 .review {
-    background-image: url("/image/svg/menu_4.svg");
+    background-image: url("../image/svg/menu_4.svg");
 }
 .magazine {
-    background-image: url("/image/svg/menu_5.svg");
+    background-image: url("../image/svg/menu_5.svg");
 }
 .sale {
-    background-image: url("/image/svg/menu_6.svg");
+    background-image: url("../image/svg/menu_6.svg");
 }
 .store {
-    background-image: url("/image/svg/menu_7.svg");
+    background-image: url("../image/svg/menu_7.svg");
 }
 .custom {
-    background-image: url("/image/svg/menu_8.svg");
+    background-image: url("../image/svg/menu_8.svg");
 }
 
 /* 스티키 헤더 */
@@ -502,10 +504,10 @@ header .ic_arrow_right {
     height: 45px;
 }
 .sticky-header .ic_menu {
-    background-image: url("/image/svg/menu_green.svg");
+    background-image: url("../image/svg/menu_green.svg");
 }
 .sticky-header .ic_menu_close {
-    background-image: url("/image/svg/menu_close_green.svg");
+    background-image: url("../image/svg/menu_close_green.svg");
 }
 .sticky-header .ic_logo {
     width: 100px;
@@ -522,16 +524,33 @@ header .ic_arrow_right {
     display: none;
 }
 
-.user_menu_list > li:first-child {
-    position: relative;
-}
+/* 장바구니 관련 css */
 .cart_item_count {
     position: absolute;
     font-size: 0.8rem;
     color: #fff;
-    background-color: #e7b343;
+    background-color: #E7B343;
     padding: 2px 6px 4px;
     border-radius: 100%;
-    bottom: 0;
-    right: -4px;
+    bottom: 4px;
+    right: 1.5px;
+}
+.user_menu_item_a {
+    position:relative;
+}
+
+/* 헤더 아이콘 수정 */
+.user_menu_item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: transparent;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+}
+.user_menu_item:hover {
+    background-color: #f0f0f0d0;
 }

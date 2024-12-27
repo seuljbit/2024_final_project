@@ -1,55 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const slides = document.querySelectorAll('.main_slide');
-    const prevBtn = document.querySelector('.slidePrevBtn');
-    const nextBtn = document.querySelector('.slideNextBtn');
-    let currentIndex = 0;
-    const slideCount = slides.length;
-    const intervalTime = 3000; // 5초마다 자동 슬라이드
-    let autoSlideInterval;
-  
-    // 슬라이드 표시 함수
-    function showSlide(index) {
-      const offset = -index * 100; // 슬라이드를 왼쪽으로 이동
-      document.querySelector('.main_slides').style.transform = `translateX(${offset}%)`;
-    }
-  
-    // 다음 슬라이드
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % slideCount; // 마지막에서 처음으로 돌아감
-      showSlide(currentIndex);
-    }
-  
-    // 이전 슬라이드
-    function prevSlide() {
-      currentIndex = (currentIndex - 1 + slideCount) % slideCount; // 처음에서 마지막으로 돌아감
-      showSlide(currentIndex);
-    }
-  
-    // 자동 슬라이드 시작
-    function startAutoSlide() {
-      autoSlideInterval = setInterval(nextSlide, intervalTime);
-    }
-  
-    // 자동 슬라이드 멈춤
-    function stopAutoSlide() {
-      clearInterval(autoSlideInterval);
-    }
-  
-    // 버튼 클릭 이벤트
-    nextBtn.addEventListener('click', function () {
-      stopAutoSlide(); // 버튼 클릭 시 자동 슬라이드 멈춤
-      nextSlide();
-      startAutoSlide(); // 다시 자동 슬라이드 시작
-    });
-  
-    prevBtn.addEventListener('click', function () {
-      stopAutoSlide();
-      prevSlide();
-      startAutoSlide();
-    });
-  
-    // 초기 자동 슬라이드 시작
-    startAutoSlide();
+    
 
     const svg = document.querySelector('.owl'); // SVG 요소
     const leftPath = document.querySelector('.left-eye'); // 왼쪽 눈 path
@@ -141,7 +91,16 @@ document.addEventListener('DOMContentLoaded', function () {
   
       requestAnimationFrame(animate);
     };
-  
     animate();
+
+    document.getElementById("chatBtn").addEventListener("click", () => {
+      // 애니메이션 멈추기
+      const chatBtn = document.querySelector(".chat-bot > button");
+      chatBtn.style.animation = "none";
+  
+      // 채팅 박스 올리기
+      const chatBox = document.querySelector(".chat-box");
+      chatBox.style.bottom = "100px"; // 자연스럽게 100px 위치로 이동
+    });  
   });
   
