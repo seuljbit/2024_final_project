@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    
-
     const svg = document.querySelector('.owl'); // SVG 요소
     const leftPath = document.querySelector('.left-eye'); // 왼쪽 눈 path
     const rightPath = document.querySelector('.right-eye'); // 오른쪽 눈 path
@@ -92,15 +90,104 @@ document.addEventListener('DOMContentLoaded', function () {
       requestAnimationFrame(animate);
     };
     animate();
+});
 
-    document.getElementById("chatBtn").addEventListener("click", () => {
-      // 애니메이션 멈추기
-      const chatBtn = document.querySelector(".chat-bot > button");
-      chatBtn.style.animation = "none";
-  
-      // 채팅 박스 올리기
-      const chatBox = document.querySelector(".chat-box");
-      chatBox.style.bottom = "100px"; // 자연스럽게 100px 위치로 이동
-    });  
-  });
-  
+// Swiper 초기화
+var swiper = new Swiper(".mySwiper", {
+  autoplay: {
+    delay: 1000000, // 자동 재생 시간 설정
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  loop: true, // 슬라이드 반복
+  on: {
+    slideChangeTransitionStart: function () {
+      // 현재 활성 슬라이드 가져오기
+      const activeSlide = document.querySelector(".swiper-slide-active");
+
+      if (activeSlide.classList.contains("slide2")) {
+        var tl = gsap.timeline({ defaults: { duration: 1.4, ease: "circ.inOut" } }); // 지속 시간 0.5초로 조정
+          // circ 애니메이션
+          tl.fromTo(
+            ".circ",
+            { x:"10%", y:"-50%", scale: 0.5, opacity: 0 }, // 초기 상태
+            { x:"10%", y:"-50%", scale: 1, opacity: 1 }, 0.1 // 최종 상태
+          )
+          tl.fromTo(
+            ".circ1",
+            { scale: 0.5, opacity: 0 }, // 초기 상태
+            { scale: 1, opacity: 1 }, 0.1 // 최종 상태
+          )
+          tl.fromTo(
+            ".circ2",
+            { scale: 0.5, opacity: 0 }, // 초기 상태
+            { scale: 1, opacity: 1 }, 0.1 // 최종 상태
+          )
+          tl.fromTo(
+            ".circ3",
+            { x:"70%", y:"50%", scale: 0.5, opacity: 0 }, // 초기 상태
+            { scale: 1, opacity: 1 }, 0.1 // 최종 상태
+          )
+          tl.fromTo(
+            "text_area > p",
+            {opacity: 0},
+            {opacity: 1}, 0.1
+          )
+          // main_kid 애니메이션 (circ가 끝난 뒤 시작)
+          tl.fromTo(
+            ".main_kid",
+            { scale: 0.3, opacity: 0 }, // 초기 상태
+            { scale: 0.65, opacity: 1 }, 0.4 // 최종 상태
+          );
+      }
+
+      // slide1이 활성화된 경우 애니메이션 트리거
+      if (activeSlide.classList.contains("slide4")) {
+        var tl = gsap.timeline({ defaults: { duration: 1.5, ease: "power2.out" } });
+
+        // 애니메이션 추가
+        tl.fromTo(".slide4 .center",
+          { x:"-50%", y:"-50%", scale: 1, opacity: 0 }, // 초기 상태
+          { opacity: 1 }, // 최종 상태
+          0 ) // 동시에 실행 시작
+
+        // book 애니메이션 (공통 처리)
+        tl.fromTo(
+          ".slide4 .book", // 모든 책을 선택
+          { x: 0, y: 1000, opacity: 0.3 }, // 초기 상태
+          { 
+            opacity: 1, // 공통 최종 상태
+            y: (i) => {
+              switch (i) {
+                case 0: return 10; // 첫 번째 요소
+                case 1: return 50;  // 두 번째 요소
+                case 2: return 100; // 세 번째 요소
+                case 3: return 140; // 세 번째 요소
+                case 4: return 180; // 세 번째 요소
+                default: return 0;  // 나머지 요소
+              }
+            },
+            stagger: 0.3 // 동시에 실행
+          }, 0 // 타임라인에서 동일 시작 시간
+        );
+      } else {
+        // 다른 슬라이드로 전환 시 초기화
+        gsap.set(".slide4 .center", {opacity: 0 });
+      }
+    },
+  },
+});
+
+// 첫 번째 슬라이드 애니메이션 수동 실행
+document.addEventListener("DOMContentLoaded", function () {
+  const firstSlide = document.querySelector(".swiper-slide-active");
+
+  if (firstSlide && firstSlide.classList.contains("slide1")) {
+  }
+});
