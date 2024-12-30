@@ -16,6 +16,7 @@ header.z-index-active {
     top: 0;
     left: 0;
     padding: 0;
+    z-index: 200;
 }
 .sticky-header .header_above {
     display: none;
@@ -588,6 +589,8 @@ header .ic_arrow_right {
     padding: 20px;
     background-color: #fff;
     border-bottom: 1px solid #c6c6c6;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 .notification_list_header > ul {
     position: relative;

@@ -106,10 +106,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // 스크롤 이벤트 추가
     window.addEventListener("scroll", function () {
         lastScrollY = window.scrollY; // 현재 스크롤 위치 저장
+        console.log("Scroll position updated:", lastScrollY); // 디버깅용
 
         // requestAnimationFrame이 진행 중이 아닐 때만 실행
         if (!ticking) {
             window.requestAnimationFrame(function () {
+                console.log("Handling scroll for:", lastScrollY); // 디버깅용
                 handleScroll(lastScrollY); // 스크롤 위치에 따른 처리
                 ticking = false; // requestAnimationFrame 완료 후 플래그 해제
             });
@@ -119,10 +121,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 스크롤 위치에 따른 클래스 처리 함수
     function handleScroll(scrollY) {
-        const header = document.querySelector("header"); // 헤더 요소 선택
-        if (!header) return; // 헤더 요소가 없을 경우 종료
+        if (!header) {
+            console.error('헤더 요소를 찾을 수 없음');
+            return;
+        }
+        console.log('스크롤 위치:', scrollY); // 스크롤 값 확인
+        console.log('현재 헤더 클래스:', header.className); // 현재 클래스 확인
 
-        if (scrollY > 300) {
+        if (scrollY > 250) {
             header.classList.remove("default-header");
             header.classList.add("sticky-header");
         } else {
@@ -130,10 +136,13 @@ document.addEventListener('DOMContentLoaded', function () {
             header.classList.add("default-header");
         }
     }
+    window.addEventListener("scroll", function () {
+        console.log('스크롤 이벤트 트리거됨'); // 스크롤 이벤트 확인용
+    });    
 
     const bell = document.querySelector('.user_menu_item.bell');
     const notificationList = document.querySelector('.notification_list');
-    
+
     // 알림 리스트 토글 함수
     const toggleNotificationList = () => {
         const isVisible = notificationList.style.display === 'block';
@@ -144,13 +153,13 @@ document.addEventListener('DOMContentLoaded', function () {
             notificationList.style.display = 'block'; // 보이기
             header.style.zIndex = '100'; // z-index 클래스 추가
         }
-    };    
-    
+    };
+
     // bell 클릭 이벤트
     bell.addEventListener('click', (event) => {
         event.stopPropagation(); // 이벤트 전파 차단
         toggleNotificationList();
-    });    
+    });
 
     // 바깥 클릭 시 알림 리스트 닫기
     const closeNotificationList = (event) => {
@@ -185,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // 클릭된 아이템에 select 클래스 추가
             item.classList.add('select');
-            
+
             // 클릭된 아이템에 따라 콘텐츠 보이기/숨기기
             if (item.classList.contains('news')) {
                 notificationContent.style.display = 'block'; // 알림 보이기

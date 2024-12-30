@@ -113,7 +113,7 @@
     border: 1px solid #39553F;
     background-color: #39553F;
 }
-
+.star {cursor: pointer;}
 .my_orders_box_wrap {
     gap: 0;
     justify-content: flex-start;
@@ -334,6 +334,7 @@
 .book_review_rate {
     justify-content: space-between;
     align-content: center;
+    z-index: 10;
 }
 .rating-score {
     display: inline-flex;

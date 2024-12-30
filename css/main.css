@@ -3,9 +3,9 @@ main .slide .element {
   background-size: contain;
   background-repeat: no-repeat;
 }
-.swiper {
+.mySwiper {
   width: 100%;
-  height: 80vh;
+  height: 65vh;
   overflow: hidden;
 }
 main .inner {
@@ -36,6 +36,16 @@ main .inner {
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+.milk-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+.slide1 {
+  background-color: #7A644F;
 }
 .circ1 {
   width: 200px;
@@ -79,7 +89,16 @@ main .inner {
   z-index: 2;
   opacity: 0;
 }
-.text_area a {
+.text_area {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  top: 50%;
+  left: 0;
+  transform: translate(0%, -50%); 
+}
+.slide2 .text_area a {
   display: inline-block;
   padding: 10px;
   background-color: #E7B343;
@@ -105,18 +124,9 @@ main .inner {
 .slide2 {
   background-color: #fff0cf;
 }
-.slide2 .title_text {
+.title_text {
   font-size: 2.1rem;
   font-weight: 700;
-}
-.text_area {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  top: 50%;
-  left: 0;
-  transform: translate(0%, -50%); 
 }
 .sub_text {
   color: #2d2d2d;
@@ -127,8 +137,55 @@ main .inner {
   margin-top: 20px;
   color: #555;
 }
+.ic_sparkle {
+  background-image: url("/image/svg/sparkle.svg");
+  width: 25px;
+  height: 25px;
+}
+.trophy {
+  position: absolute;
+  background-image: url("/image/main/trophy.png");
+  width: calc(100% / 6);
+  height: calc(100% / 6);
+  transform: rotate(12deg); /* 45도 회전 */
+  transform-origin: top left; /* 회전 기준점 설정 */
+  left: 16%;
+  top: 22%;
+  z-index: -1;
+}
 .slide4 {
   background-color: #7f8b65;
+}
+.review-event-banner {
+  position: relative;
+  left: calc(1200px - 60%);
+  width: 60%;
+  height: 100%;
+}
+.girl, .man {
+  position: absolute;
+  top: 1%;
+  height: 352px;
+  transform: scale(0.6);
+}
+.girl {
+  width: 191px;
+  background-image: url("/image/main/girl.png");
+  left: 14%;
+}
+.man {
+  width: 240px;
+  background-image: url("/image/main/man.png");
+  right: -1%;
+}
+.slide3 .review {
+  position: absolute;
+  background-image: url("/image/main/memo.png");
+  width: calc(1026px * 0.5);
+  height: calc(778px * 0.5);
+  top: 5%;
+  left: 20%;
+  z-index: -1;
 }
 
 .slide4 .center > .book_mark {
@@ -181,14 +238,56 @@ main .inner {
 .swiper-pagination-bullet-active {
   background-color: #555 !important;
 }
-.shape {
-  width: 300px;
-  height: 300px;
-  background: #3498db;
-  border-radius: 50px;
-  clip-path: polygon(20% 0%, 80% 0%, 100% 40%, 70% 100%, 0% 70%);
+.slide3 {
+  background-color: #E1EBF5;
 }
-
+.slide5 {
+  background-color: #f8f8f8;
+  overflow: hidden;
+}
+.slide_right {
+  position: relative;
+  left: calc(1200px - 60%);
+  width: 60%;
+  height: 1500px;
+  display: flex;
+  overflow: hidden;
+}
+.slide_right1, .slide_right2, .slide_right3 {
+  position: relative;
+  width: calc(100% / 3);
+  height: 100%;
+}
+.writer {
+  position: absolute;
+  width: 200px;
+  height: 400px;
+  left:0;
+}
+.writer1 {
+  background-image: url("/image/main/writer1.png");
+  top: -500px;
+}
+.writer2 {
+  background-image: url("/image/main/writer2.png");
+  top: -250px;
+}
+.writer3 {
+  background-image: url("/image/main/writer3.png");
+  top: -250px;
+}
+.writer4 {
+  background-image: url("/image/main/writer4.png");
+  top: 0px;
+}
+.writer5 {
+  background-image: url("/image/main/writer5.png");
+  top: 250px;
+}
+.writer6 {
+  background-image: url("/image/main/writer6.png");
+  top: 250px;
+}
   /* chat-bot */
   .chat-bot {
     position: fixed;
