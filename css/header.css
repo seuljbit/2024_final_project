@@ -21,6 +21,7 @@ header.z-index-active {
 .sticky-header .header_above {
     display: none;
 }
+
 header .inner {
     width: 1060px;
     max-width: 1280px;
@@ -490,6 +491,7 @@ header .ic_arrow_right {
     top: 0;
     left: 25%;
     padding: 0;
+    margin: 7.5px 0;
 }
 .sticky-header .header_center .inner {
     width: 1000px;
@@ -513,13 +515,8 @@ header .ic_arrow_right {
 .sticky-header .ic_menu_close {
     background-image: url("../image/svg/menu_close_green.svg");
 }
-.sticky-header .ic_logo {
+.sticky-header .ic_logo, .sticky-header .header_logo {
     width: 100px;
-    margin-left: 10px;
-}
-.sticky-header .header_logo{
-    width: 100px;
-    padding-top: 17px;
 }
 .sticky-header .nav_all {
     padding-top: 10px;

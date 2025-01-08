@@ -1,8 +1,11 @@
 section:not(:first-of-type) {
   position: relative;
   margin-top: 100px;
-  min-height: 90vh;
+  min-height: 60vh;
   overflow-x: hidden;
+}
+section:last-of-type {
+  margin-top: 120px;
 }
 main .slide .element {
   background-position: center;
@@ -11,12 +14,11 @@ main .slide .element {
 }
 #mySwiper {
   width: 100%;
-  height: 70vh;
+  height: 55vh;
   overflow: hidden;
   margin: 0;
 }
 main .inner {
-  width: 1250px;
   height: 100%;
   overflow: visible;
   position: relative;
@@ -120,15 +122,23 @@ main .inner {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  top: 50%;
+  top: 35%;
   left: 0;
   padding-left: 30px;
-  transform: translate(0%, -50%); 
+  transform: translate(0%, -35%);
 }
 .slide2 .text_area a {
   display: inline-block;
   padding: 10px;
   background-color: #E7B343;
+  color: #fff;
+  border-radius: 8px;
+  letter-spacing: 1px;
+}
+.slide3 .text_area a {
+  display: inline-block;
+  padding: 10px;
+  background-color: #65a1dd;
   color: #fff;
   border-radius: 8px;
   letter-spacing: 1px;
@@ -140,7 +150,7 @@ main .inner {
   height: 100%;
   top: 50%; /* 부모의 세로 중심 */
   left: 50%; /* 부모의 가로 중심 */
-  transform: scale(0.1), translate(-50%, -50%); 
+  transform: scale(0.1), translate(-50%, -50%);
   background-color: #00000030;
   display: flex;
   align-items: center;
@@ -298,69 +308,69 @@ main .inner {
   letter-spacing: 2px;
 }
 
-  /* chat-bot */
-  .chat-bot {
-    position: fixed;
-    right: 30px;
-    bottom: -15px;
-    width: 3px;
-    height: 3px;
-    z-index: 50;
-  }
-  .chat-bot > button {
-    position: absolute;
-    right: -10px;
-    bottom: -35px; /* 초기 위치 */
-    animation: bounce 1.7s infinite ease-in-out;  /*부드러운 애니메이션*/
-  }
-  .left-eye, .right-eye {
-    position: relative; /* 눈동자의 기준점 */
-    width: 40px; /* 눈 크기 */
-    height: 40px; /* 눈 크기 */
-    overflow: hidden; /* 눈동자가 벗어나지 않게 */
-  }
-  
-  
-  .eye-pupil {
-    position: absolute; /* 부모 요소 기준 */
-    background-color: #2d2d2d;
-    border-radius: 50%;
-    width: 8px; /* 눈동자 크기 */
-    height: 8px; /* 눈동자 크기 */
-    top: 50%; /* 부모 요소의 정중앙 */
-    left: 50%; /* 부모 요소의 정중앙 */
-    transform: translate(-50%, -50%); /* 정중앙 보정 */
-  }
-  
-  
-  @keyframes bounce {
-    0% {
+/* chat-bot */
+.chat-bot {
+  position: fixed;
+  right: 30px;
+  bottom: -15px;
+  width: 3px;
+  height: 3px;
+  z-index: 50;
+}
+.chat-bot > button {
+  position: absolute;
+  right: -10px;
+  bottom: -35px; /* 초기 위치 */
+  animation: bounce 1.7s infinite ease-in-out;  /*부드러운 애니메이션*/
+}
+.left-eye, .right-eye {
+  position: relative; /* 눈동자의 기준점 */
+  width: 40px; /* 눈 크기 */
+  height: 40px; /* 눈 크기 */
+  overflow: hidden; /* 눈동자가 벗어나지 않게 */
+}
+
+
+.eye-pupil {
+  position: absolute; /* 부모 요소 기준 */
+  background-color: #2d2d2d;
+  border-radius: 50%;
+  width: 8px; /* 눈동자 크기 */
+  height: 8px; /* 눈동자 크기 */
+  top: 50%; /* 부모 요소의 정중앙 */
+  left: 50%; /* 부모 요소의 정중앙 */
+  transform: translate(-50%, -50%); /* 정중앙 보정 */
+}
+
+
+@keyframes bounce {
+  0% {
       bottom: -35px;
-    }
-    50% {
-      bottom: -25px; /* 중간에서 최저점 */
-    }
-    100% {
-      bottom: -35px; /* 원래 위치 */
-    }
   }
+  50% {
+      bottom: -25px; /* 중간에서 최저점 */
+  }
+  100% {
+      bottom: -35px; /* 원래 위치 */
+  }
+}
 
 .chat-box {
-    position: absolute;
-    bottom: -500px; /* 초기 위치 */
-    right: 50px;
-    width: 350px;
-    height: 500px;
-    /*background-color: rgb(255, 250, 243);*/
-    background-color: #d8e3ed;
-    border-radius: 5px;
-    transition: bottom 0.5s ease-in-out; /* 자연스러운 애니메이션 */
-    box-shadow: 0 0 0 1px #eaebec, 0 4px 8px 0 rgba(0, 0, 0, .3);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 1000;
-    /* filter: url(#filter_tornpaper); */
+  position: absolute;
+  bottom: -500px; /* 초기 위치 */
+  right: 50px;
+  width: 350px;
+  height: 500px;
+  /*background-color: rgb(255, 250, 243);*/
+  background-color: #d8e3ed;
+  border-radius: 5px;
+  transition: bottom 0.5s ease-in-out; /* 자연스러운 애니메이션 */
+  box-shadow: 0 0 0 1px #eaebec, 0 4px 8px 0 rgba(0, 0, 0, .3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1000;
+  /* filter: url(#filter_tornpaper); */
 }
 .chat-footer, .chat-header {
   position: relative;
@@ -417,7 +427,7 @@ main .inner {
   width: 20px;
   height: 20px;
 }
-  
+
 @font-face {
   font-family: 'Recipekorea';
   src: url('/image/Recipekorea\ 레코체\ FONT.ttf');
@@ -539,14 +549,14 @@ main .inner {
   z-index: -1;
 }
 .daily_pick_containner::after {
-  transform: translate(50%, -50%);
+  transform: translate(40%, -50%);
   top: 50%;
-  left: -61%;
+  left: -70%;
 }
 .bestseller_containner::after {
-  transform: translate(-50%, -50%);
+  transform: translate(-40%, -50%);
   top: 50%;
-  right: -61%;
+  right: -70%;
 }
 .daily_pick_left {
   width: 45%;
@@ -835,7 +845,6 @@ main .inner {
   left: 0;
   z-index: 1;
   width: 100%;
-  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -847,13 +856,14 @@ main .inner {
   border-radius: 5em;
   font-size: 20px;
   font-weight: 500;
-  padding: 1em 2em;
+  padding: 0 2em;
 }
 
 .swiper-card {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom : 60px;
 }
 
 .swiper-card > div {
@@ -987,7 +997,7 @@ main .inner {
 
 footer{margin: 0;}
 .notice {
-  margin-top: 100px;
+  margin-top: 160px;
   border-top: 2px solid #c6c6c6;
   padding: 12px 0;
 }
@@ -1050,10 +1060,10 @@ footer{margin: 0;}
 }
 .new_book_swiper .swiper-slide.swiper-slide-active[data-swiper-slide-index="2"]::after {
   background-color: #BF762D;
-}  
+}
 .new_book_swiper .swiper-slide.swiper-slide-active[data-swiper-slide-index="3"]::after {
   background-color: #3471AE;
-}  
+}
 .new_book_swiper .swiper-slide.swiper-slide-active[data-swiper-slide-index="4"]::after {
   background-color: #670107;
 }
@@ -1144,10 +1154,15 @@ footer{margin: 0;}
   flex-direction: column;
   text-align: start;
 }
-.top > .writer {font-size: 0.8rem;color: #fff;}
+.top > .writer {
+  font-size: 0.8rem;
+  color: #fff;
+  margin-top: 14px;
+}
 .top > strong {font-size: 1.36rem;color: #fff;}
 .bottom > span {
   font-size: 1rem;
+  line-height: 1.3rem;
   color: #fff;
 }
 .new_book_swiper_right {
@@ -1164,4 +1179,3 @@ footer{margin: 0;}
   height: auto;
   object-fit: contain;
 }
-

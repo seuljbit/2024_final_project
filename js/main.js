@@ -310,7 +310,7 @@ gsap.utils.toArray(".section").forEach((section) => {
       start: "top 90%", // 섹션 상단이 화면의 80% 위치에 도달하면 시작
       end: "top 70%", // 섹션 상단이 화면의 20% 위치에 도달하면 끝
       scrub: 1, // 부드러운 스크러빙
-      markers: true, // 개발가이드선 (디버깅용, 확인 후 제거 가능)
+      //markers: true, // 개발가이드선 (디버깅용, 확인 후 제거 가능)
       toggleActions: "play none none none", // 스크롤 방향에 따라 동작
       scroller: ".container",
     },

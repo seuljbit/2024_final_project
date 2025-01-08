@@ -120,6 +120,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // 스크롤 위치에 따른 클래스 처리 함수
+    const container = document.querySelector('.container'); // 스크롤 영역인 div
+    
     function handleScroll(scrollY) {
         if (!header) {
             console.error('헤더 요소를 찾을 수 없음');
@@ -127,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         console.log('스크롤 위치:', scrollY); // 스크롤 값 확인
         console.log('현재 헤더 클래스:', header.className); // 현재 클래스 확인
-
+    
         if (scrollY > 250) {
             header.classList.remove("default-header");
             header.classList.add("sticky-header");
@@ -136,9 +138,17 @@ document.addEventListener('DOMContentLoaded', function () {
             header.classList.add("default-header");
         }
     }
-    window.addEventListener("scroll", function () {
-        console.log('스크롤 이벤트 트리거됨'); // 스크롤 이벤트 확인용
-    });    
+    
+    if (container) {
+        container.addEventListener("scroll", function () {
+            const scrollY = container.scrollTop; // container의 스크롤 위치
+            console.log('스크롤 이벤트 트리거됨'); // 스크롤 이벤트 확인용
+            handleScroll(scrollY);
+        });
+    } else {
+        console.error('container 요소를 찾을 수 없음');
+    }
+     
 
     const bell = document.querySelector('.user_menu_item.bell');
     const notificationList = document.querySelector('.notification_list');
