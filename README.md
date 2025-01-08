@@ -1,7 +1,19 @@
-<div style="position: relative; width: 100%; height: 300px;">
+<!-- <div style="position: relative; width: 100%; height: 300px;">
     <img src="https://capsule-render.vercel.app/api?type=venom&color=DEE4D1&height=300&section=header&fontSize=90" alt="Capsule Render" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover;">
     <img src="https://raw.githubusercontent.com/ezenproject2/finalproject/master/src/main/resources/static/image/logo.png" alt="로고 이미지" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-</div>
+</div> -->
+<table style="position: relative; width: 100%; height: 300px; text-align: center;">
+    <tr>
+        <td style="position: relative;">
+            <!-- Venom 이미지 -->
+            <img src="https://capsule-render.vercel.app/api?type=venom&color=DEE4D1&height=300&section=header&fontSize=90" 
+                 alt="Capsule Render" style="width: 100%; height: auto;">
+            <!-- 로고 이미지 -->
+            <img src="https://raw.githubusercontent.com/ezenproject2/finalproject/master/src/main/resources/static/image/logo.png" 
+                 alt="로고 이미지" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, 50%);">
+        </td>
+    </tr>
+</table>
 <br>
 
 <h2 style="display: flex; align-items: center;">
