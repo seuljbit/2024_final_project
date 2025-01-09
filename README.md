@@ -1,6 +1,6 @@
 <div style="position: relative; width: 100%; height: 300px;">
     <img src="https://capsule-render.vercel.app/api?type=venom&color=DEE4D1&height=300&section=header&fontSize=90" alt="Capsule Render" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover;">
-    <img src="https://raw.githubusercontent.com/ezenproject2/finalproject/master/src/main/resources/static/image/logo.png" alt="로고 이미지" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <img src="https://raw.githubusercontent.com/ezenproject2/finalproject/master/src/main/resources/static/image/logo.png" alt="로고 이미지" style="display:inline; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
 </div>
 <br>
 
@@ -159,9 +159,9 @@
 </h2>
 <br>
 
-**회원 관리**
+### * 회원 관리
 
-- 개요 : 회원가입, 로그인/로그아웃, 회원 정보 수정, 아이디 찾기, 비밀번호 재설정, 회원 탈퇴, 등급/포인트/쿠폰 관리
+#### 개요 : 회원가입, 로그인/로그아웃, 회원 정보 수정, 아이디 찾기, 비밀번호 재설정, 회원 탈퇴, 등급/포인트/쿠폰 관리
 <details>
 <summary>회원 관리 자세히 보기</summary>
 
@@ -172,10 +172,10 @@
 <img src="https://github.com/user-attachments/assets/824aa805-84be-4c24-826f-deec19e5f0d7">
 </details>
 
+<br>
 
-
-**상품(도서) 관리**
- 개요 : 상품 등록 테스트 코드 구현, 상품 목록, 상세페이지 구성
+### * 상품(도서) 관리
+#### 개요 : 상품 등록 테스트 코드 구현, 상품 목록, 상세페이지 구성
 <details>
 <summary>도서 관리 자세히 보기</summary>
 
@@ -186,8 +186,10 @@
 
 </details>
 
-**장바구니 및 결제**
- 개요 : 장바구니/결제 페이지 구현, 온라인/픽업 주문 시스템, 결제 시스템 구현, 결제 시 포인트 및 쿠폰 사용, 결제 완료 후 알림 발송
+<br>
+
+### * 장바구니 및 결제
+#### 개요 : 장바구니/결제 페이지 구현, 온라인/픽업 주문 시스템, 결제 시스템 구현, 결제 시 포인트 및 쿠폰 사용, 결제 완료 후 알림 발송
 <details>
 <summary>장바구니 및 결제 자세히 보기</summary>
 
@@ -202,8 +204,10 @@
 
 </details>
 
-**마이페이지**
- 개요 : 배송지 정보 수정, 포인트/쿠폰 사용 이력 확인, 1:1 문의 시스템 구현
+<br>
+
+### * 마이페이지
+#### 개요 : 배송지 정보 수정, 포인트/쿠폰 사용 이력 확인, 1:1 문의 시스템 구현
 <details>
 <summary>마이페이지 자세히 보기</summary>
 
@@ -216,8 +220,10 @@
 
 </details>
 
-**주문 내역 및 환불 / 리뷰 관리**
- 개요 : 주문 내역, 주문 상세 확인, 환불 시스템 구현, 리뷰 CRUD 및 추천 시스템 구현
+<br>
+
+### * 주문 내역 및 환불 / 리뷰 관리
+#### 개요 : 주문 내역, 주문 상세 확인, 환불 시스템 구현, 리뷰 CRUD 및 추천 시스템 구현
 <details>
 <summary>주문 내역 및 환불 / 리뷰 관리 자세히 보기</summary>
 
@@ -230,8 +236,10 @@
 
 </details>
 
-**매장안내, 알림, 챗봇**
- 개요 : 매장 안내 페이지, 사용자 활동에 반응하여 알림 발송, 채팅 봇 구현
+<br>
+
+### * 매장안내, 알림, 챗봇
+#### 개요 : 매장 안내 페이지, 사용자 활동에 반응하여 알림 발송, 채팅 봇 구현
 <details>
 <summary>매장안내, 알림, 챗봇 자세히 보기</summary>
 
@@ -244,8 +252,10 @@
 
 </details>
 
-**관리자 기능**
- 개요 : 상품 등록, 회원 리스트 확인, 1:1 문의 답변, 공지사항 CRUD
+<br>
+
+### * 관리자 기능
+#### 개요 : 상품 등록, 회원 리스트 확인, 1:1 문의 답변, 공지사항 CRUD
 <details>
 <summary>관리자 기능 자세히 보기</summary>
 
